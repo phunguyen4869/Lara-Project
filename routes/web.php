@@ -15,17 +15,24 @@ use App\Http\Controllers\Admin\Users\LoginController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/lara-welcome', function () {
     return view('welcome');
 });
 
+// Route::get(
+//     'admin/users/login',
+//     [LoginController::class, 'index']
+// );
+
+//get route to login page
 Route::get(
-    'admin/users/login',
+    '/admin/login',
     [LoginController::class, 'index']
 );
 
+//post data to store function in LoginController
 Route::post(
-    'admin/users/login/store',
+    'admin/login/store',
     [LoginController::class, 'store']
 );
 
