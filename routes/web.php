@@ -28,7 +28,7 @@ Route::get('/lara-welcome', function () {
 Route::get(
     '/admin/login',
     [LoginController::class, 'index']
-);
+)->name('login');
 
 //post data to store function in LoginController
 Route::post(
@@ -36,7 +36,11 @@ Route::post(
     [LoginController::class, 'store']
 );
 
-Route::get(
-    'admin/dashboard',
-    [DashboardController::class, 'index']
-)->name('admin.dashboard');
+//middleware group
+Route::middleware('auth')->group(function () {
+    //get route to dashboard page
+    Route::get(
+        'admin/dashboard',
+        [DashboardController::class, 'index']
+    )->name('admin');
+});

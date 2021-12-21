@@ -24,10 +24,10 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt([
-            'email' => $request->email,
-            'password' => $request->password,
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
         ], $request->remember)) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin');
         } else {
             return redirect()->back()->withInput()->withErrors([
                 'email' => 'Email or password is invalid',
