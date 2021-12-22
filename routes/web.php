@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\LoginController;
 
@@ -19,7 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+
+//middleware group
+Route::prefix('admin')->group(function () {
+
     //route to login page
     Route::get(
         'login',
@@ -31,24 +35,28 @@ Route::group(['prefix' => 'admin'], function () {
         'login/store',
         [LoginController::class, 'store']
     );
-});
 
 
-//middleware group
-Route::middleware('auth')->group(function () {
-    Route::prefix('admin')->group(function () {
+    Route::middleware('auth')->group(function () {
+
         //get route to dashboard page
         Route::get(
             'dashboard',
             [DashboardController::class, 'index']
         )->name('dashboard');
+
         //logout route
         Route::get(
             'logout',
             [LoginController::class, 'logout']
         )->name('logout');
+
         //menu routes
         Route::prefix('menus')->group(function () {
+            Route::get(
+                'create',
+                [MenuController::class, 'create']
+            );
         });
     });
 });
