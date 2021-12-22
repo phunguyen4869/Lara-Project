@@ -27,7 +27,7 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ], $request->remember)) {
-            return redirect()->route('admin');
+            return redirect()->route('dashboard');
         } else {
             return redirect()->back()->withInput()->withErrors([
                 'email' => 'Email or password is invalid',
