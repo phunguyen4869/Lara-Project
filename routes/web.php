@@ -19,29 +19,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get(
-//     'admin/users/login',
-//     [LoginController::class, 'index']
-// );
+//route to login page
+Route::get(
+    'admin/',
+    [LoginController::class, 'index']
+)->name('login');
 
-Route::group(['prefix' => 'admin'], function () {
-    //get route to login page
+//post data to store function in LoginController
+Route::post(
+    '/login/store',
+    [LoginController::class, 'store']
+);
+
+//middleware group
+Route::middleware('auth')->group(function () {
+    //get route to dashboard page
     Route::get(
-        '/login',
-        [LoginController::class, 'index']
-    )->name('login');
+        '/dashboard',
+        [DashboardController::class, 'index']
+    )->name('admin');
+    //logout route
+    Route::get(
+        '/logout',
+        [LoginController::class, 'logout']
+    )->name('logout');
+});
 
-    //post data to store function in LoginController
-    Route::post(
-        '/login/store',
-        [LoginController::class, 'store']
-    );
-    //middleware group
-    Route::middleware('auth')->group(function () {
-        //get route to dashboard page
-        Route::get(
-            '/dashboard',
-            [DashboardController::class, 'index']
-        )->name('admin');
-    });
+//Menu routes
+Route::prefix('menus')->group(function () {
+    
 });

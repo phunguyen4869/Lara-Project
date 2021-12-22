@@ -24,8 +24,8 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password')
+            'email' => $request->email,
+            'password' => $request->password
         ], $request->remember)) {
             return redirect()->route('admin');
         } else {
@@ -33,5 +33,13 @@ class LoginController extends Controller
                 'email' => 'Email or password is invalid',
             ]);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }
