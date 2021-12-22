@@ -24,23 +24,24 @@ Route::get('/', function () {
 //     [LoginController::class, 'index']
 // );
 
-//get route to login page
-Route::get(
-    '/admin/login',
-    [LoginController::class, 'index']
-)->name('login');
-
-//post data to store function in LoginController
-Route::post(
-    'admin/login/store',
-    [LoginController::class, 'store']
-);
-
-//middleware group
-Route::middleware('auth')->group(function () {
-    //get route to dashboard page
+Route::group(['prefix' => 'admin'], function () {
+    //get route to login page
     Route::get(
-        'admin/dashboard',
-        [DashboardController::class, 'index']
-    )->name('admin');
+        '/login',
+        [LoginController::class, 'index']
+    )->name('login');
+
+    //post data to store function in LoginController
+    Route::post(
+        '/login/store',
+        [LoginController::class, 'store']
+    );
+    //middleware group
+    Route::middleware('auth')->group(function () {
+        //get route to dashboard page
+        Route::get(
+            '/dashboard',
+            [DashboardController::class, 'index']
+        )->name('admin');
+    });
 });
