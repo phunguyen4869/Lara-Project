@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\Users\LoginController;
 |
 */
 
-Route::get('/lara-welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
