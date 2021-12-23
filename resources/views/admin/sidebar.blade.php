@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div> --}}
-                
+
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -60,7 +60,7 @@
                                 </li>
                             </ul>
                         <li class="nav-item d-sm-inline-block">
-                            <a href="logout" class="nav-link">
+                            <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p>Logout</p>
                             </a>

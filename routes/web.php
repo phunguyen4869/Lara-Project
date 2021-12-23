@@ -20,8 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-//middleware group
+//prefix url admin
 Route::prefix('admin')->group(function () {
 
     //route to login page
@@ -37,19 +36,13 @@ Route::prefix('admin')->group(function () {
     );
 
 
+    //middleware group
     Route::middleware('auth')->group(function () {
-
         //get route to dashboard page
         Route::get(
             'dashboard',
             [DashboardController::class, 'index']
         )->name('dashboard');
-
-        //logout route
-        Route::get(
-            'logout',
-            [LoginController::class, 'logout']
-        )->name('logout');
 
         //menu routes
         Route::prefix('menus')->group(function () {
@@ -60,3 +53,9 @@ Route::prefix('admin')->group(function () {
         });
     });
 });
+
+//logout route
+Route::get(
+    'logout',
+    [LoginController::class, 'logout']
+)->name('logout');
