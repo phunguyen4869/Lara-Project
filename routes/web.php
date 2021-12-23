@@ -46,9 +46,15 @@ Route::prefix('admin')->group(function () {
 
         //menu routes
         Route::prefix('menus')->group(function () {
+            //get route to create menu page
             Route::get(
                 'create',
                 [MenuController::class, 'create']
+            );
+            //post route to store menu
+            Route::post(
+                'store',
+                [MenuController::class, 'store']
             );
         });
     });
