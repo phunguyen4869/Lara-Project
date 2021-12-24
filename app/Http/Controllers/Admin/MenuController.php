@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Menu\MenuService;
@@ -53,5 +54,22 @@ class MenuController extends Controller
                 'error' => true,
             ]);
         }
+    }
+
+    public function edit(Menu $menu) //check menu id is exist in database
+    {
+
+        return view('admin.menu.edit', [
+            'title' => 'Sửa danh mục ' . $menu->name,
+            'menu' => $menu,
+            'menus' => $this->menuService->getParent()
+        ]);
+    }
+
+    public function update(CreateFormRequest $request, Menu $menu)
+    {
+        $this->menuService->update($request, $menu);
+
+        return redirect('/admin/menus/list');
     }
 }

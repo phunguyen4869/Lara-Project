@@ -51,4 +51,29 @@ class MenuService
 
         return false;
     }
+
+    public function update($request, $menu)
+    {
+        try {
+            //update menu
+            //Không cho update nếu parent_id = id
+            if ($request->input('parent_id') != $menu->id) {
+                $menu->parent_id = (int) $request->input('parent_id');
+            }
+
+            $menu->name = (string) $request->input('name');
+            $menu->description = (string) $request->input('description');
+            $menu->content = (string) $request->input('content');
+            $menu->slug = Str::slug($request->input('name'), '-');
+            $menu->active = (bool) $request->input('active');
+
+            $menu->save();
+
+            session()->flash('success', 'Cập nhật menu thành công');
+            return true;
+        } catch (\Throwable $e) {
+            session()->flash('error', $e->getMessage());
+            return false;
+        }
+    }
 }

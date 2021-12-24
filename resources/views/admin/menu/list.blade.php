@@ -7,8 +7,9 @@
             <tr>
                 <th style="width:5%;">ID</th>
                 <th style="width:10%;">Name</th>
+                <th style="width:10%;">Parent ID</th>
                 <th style="width:20%">Description</th>
-                <th style="width:40%;">Content</th>
+                <th style="width:30%;">Content</th>
                 <th style="width:5%;">Active</th>
                 <th style="width:10%;">Action</th>
             </tr>

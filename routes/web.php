@@ -46,18 +46,18 @@ Route::prefix('admin')->group(function () {
 
         //menu routes
         Route::prefix('menus')->group(function () {
-            //get route to show menu list
+            //route to show menu list
             Route::get(
                 'list',
                 [MenuController::class, 'index']
             )->name('menus.index');
 
-            //get route to create menu page
+            //route to create menu page
             Route::get(
                 'create',
                 [MenuController::class, 'create']
             );
-            //post route to store menu
+            //route to store menu
             Route::post(
                 'store',
                 [MenuController::class, 'store']
@@ -66,6 +66,16 @@ Route::prefix('admin')->group(function () {
             Route::delete(
                 'destroy',
                 [MenuController::class, 'destroy']
+            );
+            //edit route to edit menu page
+            Route::get(
+                'edit/{menu}',
+                [MenuController::class, 'edit']
+            );
+            //route to update menu page
+            Route::post(
+                'edit/{menu}',
+                [MenuController::class, 'update']
             );
         });
     });
