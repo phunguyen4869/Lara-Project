@@ -13,6 +13,12 @@ class MenuService
         return Menu::where('parent_id', 0)->get();
     }
 
+    public function getAll()
+    {
+        //get all menu items from the database
+        return Menu::orderBy('id', 'asc')->get();
+    }
+
     public function create($request)
     {
         try {

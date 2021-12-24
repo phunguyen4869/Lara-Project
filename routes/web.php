@@ -46,6 +46,12 @@ Route::prefix('admin')->group(function () {
 
         //menu routes
         Route::prefix('menus')->group(function () {
+            //get route to show menu list
+            Route::get(
+                'list',
+                [MenuController::class, 'index']
+            )->name('menus.index');
+
             //get route to create menu page
             Route::get(
                 'create',
