@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Menu\CreateFormRequest;
 use App\Http\Services\Menu\MenuService;
+use App\Http\Requests\Menu\CreateFormRequest;
 
 class MenuController extends Controller
 {
@@ -17,7 +18,7 @@ class MenuController extends Controller
 
     public function index()
     {
-        return view('admin.menu.list',[
+        return view('admin.menu.list', [
             'title' => 'Danh sách danh mục',
             'menus' => $this->menuService->getAll()
         ]);
@@ -36,5 +37,21 @@ class MenuController extends Controller
         $this->menuService->create($request);
 
         return redirect()->back();
+    }
+
+    public function destroy(Request $request)
+    {
+        $result = $this->menuService->destroy($request);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa danh mục thành công'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+            ]);
+        }
     }
 }

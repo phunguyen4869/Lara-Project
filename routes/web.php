@@ -62,6 +62,11 @@ Route::prefix('admin')->group(function () {
                 'store',
                 [MenuController::class, 'store']
             );
+            //delete route to delete menu page
+            Route::delete(
+                'destroy',
+                [MenuController::class, 'destroy']
+            );
         });
     });
 });

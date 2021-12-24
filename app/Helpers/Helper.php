@@ -15,6 +15,14 @@ class Helper
                     <td>' . $menu->description . '</td>
                     <td>' . $menu->content . '</td>
                     <td>' . $menu->active . '</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="admin/menus/edit/' . $menu->id . '">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="#" onclick="removeRow('.$menu->id.', \'/admin/menus/destroy\')">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </tr>
                 ';
                 unset($menus[$key]);

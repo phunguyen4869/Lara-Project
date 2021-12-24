@@ -39,4 +39,16 @@ class MenuService
 
         return true;
     }
+
+    public function destroy($request)
+    {
+        $id = (int) $request->input('id');
+        $menu = Menu::where('id', $request->input('id'))->first();
+
+        if ($menu) {
+            return Menu::where('id', $id)->orWhere('parent_id', $id)->delete();
+        }
+
+        return false;
+    }
 }

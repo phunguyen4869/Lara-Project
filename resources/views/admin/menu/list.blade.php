@@ -1,17 +1,23 @@
 @extends('admin.main')
 
 @section('content')
+@include('admin.alert')
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Content</th>
-                <th>Active</th>
+                <th style="width:5%;">ID</th>
+                <th style="width:10%;">Name</th>
+                <th style="width:20%">Description</th>
+                <th style="width:40%;">Content</th>
+                <th style="width:5%;">Active</th>
+                <th style="width:10%;">Action</th>
             </tr>
         </thead>
         <tbody>
+            {{-- display content --}}
+            {{-- {{ App\Helpers\Helper::menus($menus) }} --}}
+
+            {{-- display html content --}}
             {!! App\Helpers\Helper::menus($menus) !!}
         </tbody>
     </table>
