@@ -52,7 +52,7 @@ Route::prefix('admin')->group(function () {
                 [MenuController::class, 'index']
             )->name('menus.index');
 
-            //route to create menu page
+            //route to create menu
             Route::get(
                 'create',
                 [MenuController::class, 'create']
@@ -76,6 +76,41 @@ Route::prefix('admin')->group(function () {
             Route::post(
                 'edit/{menu}',
                 [MenuController::class, 'update']
+            );
+        });
+
+        //product routes
+        Route::prefix('products')->group(function () {
+            //route to show product list
+            Route::get(
+                'list',
+                [ProductController::class, 'index']
+            )->name('products.index');
+
+            //route to create product
+            Route::get(
+                'create',
+                [ProductController::class, 'create']
+            );
+            //route to store product
+            Route::post(
+                'store',
+                [ProductController::class, 'store']
+            );
+            //delete route to delete product page
+            Route::delete(
+                'destroy',
+                [ProductController::class, 'destroy']
+            );
+            //edit route to edit product page
+            Route::get(
+                'edit/{product}',
+                [ProductController::class, 'edit']
+            );
+            //route to update product page
+            Route::post(
+                'edit/{product}',
+                [ProductController::class, 'update']
             );
         });
     });
