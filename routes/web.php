@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\LoginController;
 
@@ -89,12 +90,12 @@ Route::prefix('admin')->group(function () {
 
             //route to create product
             Route::get(
-                'create',
+                'add',
                 [ProductController::class, 'create']
             );
             //route to store product
             Route::post(
-                'store',
+                'add',
                 [ProductController::class, 'store']
             );
             //delete route to delete product page
