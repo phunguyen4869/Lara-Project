@@ -59,6 +59,28 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Danh mục sản phẩm
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/products/create') }}" class="nav-link">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Thêm sản phẩm</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/products/list') }}" class="nav-link">
+                                        <i class="fas fa-stream"></i>
+                                        <p>Danh sách sản phẩm</p>
+                                    </a>
+                                </li>
+                            </ul>
                         <li class="nav-item d-sm-inline-block">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>
