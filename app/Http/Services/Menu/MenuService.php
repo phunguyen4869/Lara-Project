@@ -4,6 +4,7 @@ namespace App\Http\Services\Menu;
 
 use App\Models\Menu;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class MenuService
@@ -33,7 +34,8 @@ class MenuService
 
             Session::flash('success', 'Tạo menu thành công');
         } catch (\Exception $e) {
-            Session::flash('error', $e->getMessage());
+            Session::flash('error', 'Thêm menu lỗi');
+            Log::error($e->getMessage());
             return false;
         }
 

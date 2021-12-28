@@ -37,7 +37,7 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                             with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>
@@ -59,7 +59,7 @@
                                     </a>
                                 </li>
                             </ul>
-
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
@@ -69,7 +69,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/products/create') }}" class="nav-link">
+                                    <a href="{{ url('admin/products/add') }}" class="nav-link">
                                         <i class="fas fa-plus"></i>
                                         <p>Thêm sản phẩm</p>
                                     </a>
@@ -81,6 +81,7 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
                         <li class="nav-item d-sm-inline-block">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>

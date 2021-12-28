@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Services\UploadService;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +75,7 @@ Route::prefix('admin')->group(function () {
                 'edit/{menu}',
                 [MenuController::class, 'edit']
             );
-            //route to update menu page
+            //route to update menu
             Route::post(
                 'edit/{menu}',
                 [MenuController::class, 'update']
@@ -87,7 +89,6 @@ Route::prefix('admin')->group(function () {
                 'list',
                 [ProductController::class, 'index']
             )->name('products.index');
-
             //route to create product
             Route::get(
                 'add',
@@ -98,22 +99,25 @@ Route::prefix('admin')->group(function () {
                 'add',
                 [ProductController::class, 'store']
             );
-            //delete route to delete product page
-            Route::delete(
-                'destroy',
-                [ProductController::class, 'destroy']
-            );
-            //edit route to edit product page
+            //route to edit product
             Route::get(
                 'edit/{product}',
-                [ProductController::class, 'edit']
+                [ProductController::class, 'show']
             );
-            //route to update product page
+            //route to update product
             Route::post(
                 'edit/{product}',
                 [ProductController::class, 'update']
             );
+            //route to delete product
+            Route::delete(
+                'destroy',
+                [ProductController::class, 'destroy']
+            );
         });
+
+        //upload
+        Route::post('upload/services', [UploadController::class, 'store']);
     });
 });
 
