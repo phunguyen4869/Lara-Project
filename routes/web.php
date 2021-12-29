@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\Users\LoginController;
-use App\Http\Services\UploadService;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +113,40 @@ Route::prefix('admin')->group(function () {
             Route::delete(
                 'destroy',
                 [ProductController::class, 'destroy']
+            );
+        });
+
+        //slider routes
+        Route::prefix('sliders')->group(function () {
+            //route to show slider list
+            Route::get(
+                'list',
+                [SliderController::class, 'index']
+            )->name('sliders.index');
+            //route to create slider
+            Route::get(
+                'add',
+                [SliderController::class, 'create']
+            );
+            //route to store slider
+            Route::post(
+                'add',
+                [SliderController::class, 'store']
+            );
+            //route to edit slider
+            Route::get(
+                'edit/{slider}',
+                [SliderController::class, 'show']
+            );
+            //route to update slider
+            Route::post(
+                'edit/{slider}',
+                [SliderController::class, 'update']
+            );
+            //route to delete slider
+            Route::delete(
+                'destroy',
+                [SliderController::class, 'destroy']
             );
         });
 
