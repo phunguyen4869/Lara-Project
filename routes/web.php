@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ use App\Http\Controllers\Admin\Users\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 //prefix url admin
 Route::prefix('admin')->group(function () {
@@ -154,6 +155,8 @@ Route::prefix('admin')->group(function () {
         Route::post('upload/services', [UploadController::class, 'store']);
     });
 });
+
+Route::get('/', [MainController::class, 'index']);
 
 //logout route
 Route::get(
