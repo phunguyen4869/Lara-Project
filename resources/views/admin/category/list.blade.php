@@ -16,10 +16,10 @@
         </thead>
         <tbody>
             {{-- display content --}}
-            {{-- {{ App\Helpers\Helper::menus($menus) }} --}}
+            {{-- {{ App\Helpers\Helper::categories($categories) }} --}}
 
             {{-- display html content --}}
-            {!! App\Helpers\Helper::menus($menus) !!}
+            {!! App\Helpers\Helper::categories($categories) !!}
         </tbody>
     </table>
 @endsection

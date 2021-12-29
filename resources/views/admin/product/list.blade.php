@@ -24,7 +24,7 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{!! $product->content !!}</td>
-                    <td>{{ $product->menu->name }}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->price_sale }}</td>
                     <td>{!! App\Helpers\Helper::active($product->active) !!}</td>

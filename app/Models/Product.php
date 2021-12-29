@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         'name',
-        'menu_id',
+        'category_id',
         'price',
         'price_sale',
         'description',
@@ -20,8 +20,8 @@ class Product extends Model
         'active',
     ];
 
-    public function menu()
+    public function category()
     {
-        return $this->hasOne(Menu::class, 'id', 'menu_id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

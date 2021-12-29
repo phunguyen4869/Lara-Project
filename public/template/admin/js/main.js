@@ -5,7 +5,7 @@ $.ajaxSetup({
     }
 });
 
-//remove menu ajax
+//remove ajax
 function removeRow(id, url) {
     if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
         $.ajax({

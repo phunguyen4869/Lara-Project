@@ -23,7 +23,7 @@ class ProductService
     {
         return Product::where('id', $id)
             ->where('active', 1)
-            ->with('menu')
+            ->with('category')
             ->firstOrFail();
     }
 

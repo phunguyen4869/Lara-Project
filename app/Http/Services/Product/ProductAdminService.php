@@ -4,16 +4,16 @@
 namespace App\Http\Services\Product;
 
 
-use App\Models\Menu;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ProductAdminService
 {
-    public function getMenu()
+    public function getCategory()
     {
-        return Menu::where('active', 1)->get();
+        return Category::where('active', 1)->get();
     }
 
     protected function isValidPrice($request)
@@ -59,7 +59,7 @@ class ProductAdminService
 
     public function get()
     {
-        return Product::with('menu')
+        return Product::with('category')
             ->orderBy('id', 'asc')->paginate(10);
     }
 
@@ -85,7 +85,7 @@ class ProductAdminService
     {
         // Check product is exist
         $product = Product::where('id', $request->input('id'))->first();
-        
+
         if ($product) {
             $product->delete();
             return true;

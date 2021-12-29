@@ -19,17 +19,17 @@
             <div class="form-group">
                 <label for="name">Tên danh mục</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Nhập tên danh mục"
-                    value="{{ $menu->name }}">
+                    value="{{ $category->name }}">
             </div>
 
             <div class="form-group">
                 <label for="parent_id">Danh mục</label>
                 <select name="parent_id" id="parent_id" class="form-control">
-                    <option value="0" {{ $menu->parent_id == 0 ? 'selected' : '' }}>Danh mục cha</option>
-                    @foreach ($menus as $menuParent)
-                        <option value="{{ $menuParent->id }}"
-                            {{ $menu->parent_id == $menuParent->id ? 'selected' : '' }}>
-                            {{ $menuParent->name }}
+                    <option value="0" {{ $category->parent_id == 0 ? 'selected' : '' }}>Danh mục cha</option>
+                    @foreach ($categories as $categoryParent)
+                        <option value="{{ $categoryParent->id }}"
+                            {{ $category->parent_id == $categoryParent->id ? 'selected' : '' }}>
+                            {{ $categoryParent->name }}
                         </option>
                     @endforeach
                 </select>
@@ -37,12 +37,12 @@
 
             <div class="form-group">
                 <label for="description">Mô tả</label>
-                <textarea name="description" id="description" class="form-control">{{ $menu->description }}</textarea>
+                <textarea name="description" id="description" class="form-control">{{ $category->description }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="content">Mô tả chi tiết</label>
-                <textarea name="content" id="content" class="form-control">{{ $menu->content }}</textarea>
+                <textarea name="content" id="content" class="form-control">{{ $category->content }}</textarea>
             </div>
 
 
@@ -50,13 +50,13 @@
                 <label>Kích hoạt</label>
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" value="1" type="radio" id="active" name="active"
-                        {{ $menu->active == 1 ? 'checked=""' : '' }}>
+                        {{ $category->active == 1 ? 'checked=""' : '' }}>
                     <label for="active" class="custom-control-label">Có</label>
                 </div>
 
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" value="0" type="radio" id="not_active" name="active"
-                        {{ $menu->active == 0 ? 'checked=""' : '' }}>
+                        {{ $category->active == 0 ? 'checked=""' : '' }}>
                     <label for="not_active" class="custom-control-label">Không</label>
                 </div>
             </div>

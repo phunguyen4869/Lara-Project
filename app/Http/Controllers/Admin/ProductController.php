@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
         return view('admin.product.add', [
             'title' => 'Thêm sản phẩm mới',
-            'menus' => $this->productService->getMenu(),
+            'categories' => $this->productService->getCategory(),
         ]);
     }
 
@@ -51,9 +51,13 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $this->productService->insert($request);
+        $result = $this->productService->insert($request);
 
-        return redirect()->back();
+        if ($result) {
+            return redirect('admin/products/list');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -67,7 +71,7 @@ class ProductController extends Controller
         return view('admin.product.edit', [
             'title' => 'Chỉnh sửa sản phẩm',
             'product' => $product,
-            'menus' => $this->productService->getMenu(),
+            'categories' => $this->productService->getCategory(),
         ]);
     }
 

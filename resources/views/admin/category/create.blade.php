@@ -25,8 +25,8 @@
                 <label for="parent_id">Danh mục</label>
                 <select name="parent_id" id="parent_id" class="form-control">
                     <option value="0">Danh mục cha</option>
-                    @foreach ($menus as $menu)
-                        <option value="{{ $menu->id }}">{{ $menu->name }}</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>

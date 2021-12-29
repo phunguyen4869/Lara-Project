@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\ProductController;
@@ -47,38 +47,38 @@ Route::prefix('admin')->group(function () {
             [DashboardController::class, 'index']
         )->name('dashboard');
 
-        //menu routes
-        Route::prefix('menus')->group(function () {
-            //route to show menu list
+        //category routes
+        Route::prefix('categories')->group(function () {
+            //route to show category list
             Route::get(
                 'list',
-                [MenuController::class, 'index']
-            )->name('menus.index');
+                [CategoryController::class, 'index']
+            )->name('categories.index');
 
-            //route to create menu
+            //route to create category
             Route::get(
                 'create',
-                [MenuController::class, 'create']
+                [CategoryController::class, 'create']
             );
-            //route to store menu
+            //route to store category
             Route::post(
                 'store',
-                [MenuController::class, 'store']
+                [CategoryController::class, 'store']
             );
-            //delete route to delete menu page
+            //delete route to delete category page
             Route::delete(
                 'destroy',
-                [MenuController::class, 'destroy']
+                [CategoryController::class, 'destroy']
             );
-            //edit route to edit menu page
+            //edit route to edit category page
             Route::get(
-                'edit/{menu}',
-                [MenuController::class, 'edit']
+                'edit/{category}',
+                [CategoryController::class, 'edit']
             );
-            //route to update menu
+            //route to update category
             Route::post(
-                'edit/{menu}',
-                [MenuController::class, 'update']
+                'edit/{category}',
+                [CategoryController::class, 'update']
             );
         });
 

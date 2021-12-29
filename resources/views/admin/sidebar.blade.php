@@ -47,13 +47,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/menus/create') }}" class="nav-link">
+                                    <a href="{{ url('admin/categories/create') }}" class="nav-link">
                                         <i class="fas fa-plus"></i>
                                         <p>Thêm danh mục</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/menus/list') }}" class="nav-link">
+                                    <a href="{{ url('admin/categories/list') }}" class="nav-link">
                                         <i class="fas fa-stream"></i>
                                         <p>Danh sách danh mục</p>
                                     </a>

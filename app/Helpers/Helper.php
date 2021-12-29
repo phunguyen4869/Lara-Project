@@ -4,37 +4,37 @@ namespace App\Helpers;
 
 class Helper
 {
-    public static function menus($menus, $parent_id = 0, $char = '')
+    public static function categories($categories, $parent_id = 0, $char = '')
     {
         $html = '';
-        foreach ($menus as $key => $menu) {
-            if ($menu->parent_id == $parent_id) {
+        foreach ($categories as $key => $category) {
+            if ($category->parent_id == $parent_id) {
                 $html .= '<tr>
-                    <td>' . $menu->id . '</td>
-                    <td>' . $char . $menu->name . '</td>
-                    <td>' . self::parentMenu($menu->parent_id) . '</td>
-                    <td>' . $menu->description . '</td>
-                    <td>' . $menu->content . '</td>
-                    <td>' . self::active($menu->active) . '</td>
+                    <td>' . $category->id . '</td>
+                    <td>' . $char . $category->name . '</td>
+                    <td>' . self::parentCategory($category->parent_id) . '</td>
+                    <td>' . $category->description . '</td>
+                    <td>' . $category->content . '</td>
+                    <td>' . self::active($category->active) . '</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="edit/' . $menu->id . '">
+                        <a class="btn btn-primary btn-sm" href="edit/' . $category->id . '">
                             <i class="far fa-edit"></i>
                         </a>
-                        <a class="btn btn-danger btn-sm" href="#" onclick="removeRow(' . $menu->id . ', \'/admin/menus/destroy\')">
+                        <a class="btn btn-danger btn-sm" href="#" onclick="removeRow(' . $category->id . ', \'/admin/categories/destroy\')">
                             <i class="far fa-trash-alt"></i>
                         </a>
                     </td>
                 </tr>
                 ';
-                unset($menus[$key]);
+                unset($categories[$key]);
 
-                $html .= self::menus($menus, $menu->id, $char . '-');
+                $html .= self::categories($categories, $category->id, $char . '-');
             }
         }
         return $html;
     }
 
-    public static function parentMenu($id = 0)
+    public static function parentCategory($id = 0)
     {
         return $id == 0 ? 'Root' : $id;
     }

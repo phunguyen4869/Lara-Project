@@ -23,11 +23,11 @@
             </div>
 
             <div class="form-group">
-                <label for="menu_id">Danh mục</label>
-                <select name="menu_id" id="menu_id" class="form-control">
-                    @foreach ($menus as $menu)
-                        <option value="{{ $menu->id }}" {{ $product->menu_id == $menu->id ? 'selected' : '' }}>
-                            {{ $menu->name }}
+                <label for="category_id">Danh mục</label>
+                <select name="category_id" id="category_id" class="form-control">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
@@ -36,14 +36,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Giá Gốc</label>
+                        <label for="category">Giá Gốc</label>
                         <input type="number" name="price" value="{{ $product->price }}" class="form-control">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Giá Giảm</label>
+                        <label for="category">Giá Giảm</label>
                         <input type="number" name="price_sale" value="{{ $product->price_sale }}" class="form-control">
                     </div>
                 </div>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="form-group">
-                <label for="menu">Ảnh Sản Phẩm</label>
+                <label for="category">Ảnh Sản Phẩm</label>
                 <input type="file" class="form-control" id="upload">
                 <div id="image_show">
                     <a href="{{ $product->thumb }}" target="_blank">

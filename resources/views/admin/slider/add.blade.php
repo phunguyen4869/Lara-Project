@@ -11,14 +11,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Tên Slider</label>
+                        <label for="slider">Tên Slider</label>
                         <input type="text" name="name" value="{{ old('name') }}" class="form-control"
                             placeholder="Nhập tên slider">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="menu">Đường dẫn</label>
+                        <label for="slider">Đường dẫn</label>
                         <input type="text" name="url" value="{{ old('url') }}" class="form-control"
                             placeholder="Nhập đường dẫn">
                     </div>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group">
-                <label for="menu">Ảnh Slider</label>
+                <label for="slider">Ảnh Slider</label>
                 <input type="file" class="form-control" id="upload">
                 <div id="image_show">
 
@@ -36,7 +36,7 @@
 
 
             <div class="form-group">
-                <label for="menu">Sắp xếp</label>
+                <label for="slider">Sắp xếp</label>
                 <input type="number" required name="sort_by" value="{{ old('sort_by') }}" class="form-control">
             </div>
 
