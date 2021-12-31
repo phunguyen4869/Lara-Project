@@ -45,6 +45,16 @@
                 <textarea name="content" id="content" class="form-control">{{ $category->content }}</textarea>
             </div>
 
+            <div class="form-group">
+                <label for="category">Ảnh Danh Mục</label>
+                <input type="file" class="form-control" id="upload">
+                <div id="image_show">
+                    <a href="{{ $category->thumb }}" target="_blank">
+                        <img src="{{ $category->thumb }}" width="100px">
+                    </a>
+                </div>
+                <input type="hidden" name="thumb" value="{{ $category->thumb }}" id="thumb">
+            </div>
 
             <div class="form-group">
                 <label>Kích hoạt</label>

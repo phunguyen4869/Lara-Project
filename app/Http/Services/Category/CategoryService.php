@@ -22,7 +22,7 @@ class CategoryService
 
     public function show()
     {
-        return Category::select('name', 'description', 'slug')->where('active', 1)->where('parent_id', 0)->get();
+        return Category::select('name', 'description', 'slug', 'thumb')->where('active', 1)->where('parent_id', 0)->get();
     }
 
     public function create($request)
@@ -73,6 +73,7 @@ class CategoryService
             $category->content = (string) $request->input('content');
             $category->slug = Str::slug($request->input('name'), '-');
             $category->active = (bool) $request->input('active');
+            $category->thumb = (string) $request->input('thumb');
 
             $category->save();
 
