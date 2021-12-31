@@ -39,12 +39,11 @@ class Helper
     public static function headerCategories($categories, $parent_id = 0, $isMobile = false)
     {
         $html = '';
-        foreach ($categories as $key => $category) {
+        foreach ($categories as $category) {
             if ($category->parent_id == $parent_id) {
                 $html .= '
                         <li>
                             <a href="/danhmuc/' . $category->id . '-' . Str::slug($category->name, '-') . '.html">' . $category->name . '</a>';
-                            unset($categories[$key]);
                 if (self::isChild($categories, $category->id) && $isMobile == false) {
                     $html .= '<ul class="sub-menu">' . self::headerCategories($categories, $category->id) . '</ul>';
                 } elseif (self::isChild($categories, $category->id) && $isMobile == true) {

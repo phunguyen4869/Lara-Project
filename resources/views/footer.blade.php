@@ -8,7 +8,11 @@
                  </h4>
 
                  <ul>
-                    {!! App\Helpers\Helper::headerCategories($categories) !!}
+                     @foreach ($categories as $category)
+                         <a href="{{ $category->slug }}">
+                             <li>{{ $category->name }}</li>
+                         </a>
+                     @endforeach
                  </ul>
              </div>
 
