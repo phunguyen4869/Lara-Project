@@ -36,16 +36,22 @@ class Helper
         return $html;
     }
 
-    public static function headerCategories($categories, $parent_id = 0)
+    public static function headerCategories($categories, $parent_id = 0, $isMobile = false)
     {
         $html = '';
-        foreach ($categories as $category) {
+        foreach ($categories as $key => $category) {
             if ($category->parent_id == $parent_id) {
                 $html .= '
                         <li>
                             <a href="/danhmuc/' . $category->id . '-' . Str::slug($category->name, '-') . '.html">' . $category->name . '</a>';
-                if (self::isChild($categories, $category->id)) {
+                            unset($categories[$key]);
+                if (self::isChild($categories, $category->id) && $isMobile == false) {
                     $html .= '<ul class="sub-menu">' . self::headerCategories($categories, $category->id) . '</ul>';
+                } elseif (self::isChild($categories, $category->id) && $isMobile == true) {
+                    $html .= '<ul class="sub-menu-m">' . self::headerCategories($categories, $category->id) . '</ul>';
+                    $html .= '<span class="arrow-main-menu-m">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </span>';
                 }
                 $html .= '</li>';
             }

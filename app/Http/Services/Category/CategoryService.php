@@ -20,6 +20,11 @@ class CategoryService
         return Category::orderBy('id', 'asc')->get();
     }
 
+    public function show()
+    {
+        return Category::select('name', 'description', 'slug')->where('active', 1)->where('parent_id', 0)->get();
+    }
+
     public function create($request)
     {
         try {

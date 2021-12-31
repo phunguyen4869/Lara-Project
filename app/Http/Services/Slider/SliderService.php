@@ -21,7 +21,7 @@ class SliderService
 
     public function show()
     {
-        return Slider::where('active', 1)->orderBy('sort_by', 'asc')->get();
+        return Slider::select('name', 'thumb', 'url')->where('active', 1)->orderBy('sort_by', 'asc')->get();
     }
 
     public function insert($request)
@@ -30,7 +30,7 @@ class SliderService
             Slider::create($request->all());
 
             Session::flash('success', 'Thêm slider thành công');
-        } catch (\Throwable $error) {
+        } catch (\Exception $error) {
             Session::flash('error', 'Thêm slider lỗi');
             Log::error($error->getMessage());
             return  false;
