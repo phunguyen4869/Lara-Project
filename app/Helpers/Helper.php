@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Str;
+
 class Helper
 {
     public static function categories($categories, $parent_id = 0, $char = '')
@@ -32,6 +34,33 @@ class Helper
             }
         }
         return $html;
+    }
+
+    public static function headerCategories($categories, $parent_id = 0)
+    {
+        $html = '';
+        foreach ($categories as $category) {
+            if ($category->parent_id == $parent_id) {
+                $html .= '
+                        <li>
+                            <a href="/danhmuc/' . $category->id . '-' . Str::slug($category->name, '-') . '.html">' . $category->name . '</a>';
+                if (self::isChild($categories, $category->id)) {
+                    $html .= '<ul class="sub-menu">' . self::headerCategories($categories, $category->id) . '</ul>';
+                }
+                $html .= '</li>';
+            }
+        }
+        return $html;
+    }
+
+    public static function isChild($categories, $id)
+    {
+        foreach ($categories as $category) {
+            if ($category->parent_id == $id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static function parentCategory($id = 0)

@@ -367,7 +367,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .main-menu > li > a {
-  font-family: Poppins-Medium;
+  font-family: FiraSansCondensed-Black;
+  text-transform: uppercase;
   font-size: 14px;
   color: #333;
   padding: 5px 0px;
@@ -422,7 +423,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .sub-menu a {
-  font-family: Poppins-Regular;
+  font-family: FiraSans-Black;
   font-size: 14px;
   line-height: 1.5;
   color: #555;
