@@ -19,6 +19,11 @@ class SliderService
         return Slider::find($id);
     }
 
+    public function show()
+    {
+        return Slider::where('active', 1)->orderBy('sort_by', 'asc')->get();
+    }
+
     public function insert($request)
     {
         try {
