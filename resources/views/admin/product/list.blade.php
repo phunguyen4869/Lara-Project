@@ -27,7 +27,7 @@
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->price_sale }}</td>
-                    <td>{!! App\Helpers\Helper::active($product->active) !!}</td>
+                    <td>{!! App\Helpers\Helper::active($product->active, 'products', $product->id) !!}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="edit/{{ $product->id }}">
                             <i class="far fa-edit"></i>
@@ -43,5 +43,7 @@
     </table>
 
     {{-- Hiển thị phần phân trang --}}
-    {!! $products->links() !!}
+    <div class="card-footer clearfix">
+        {!! $products->links() !!}
+    </div>
 @endsection

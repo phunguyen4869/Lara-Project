@@ -8,8 +8,7 @@ $.ajaxSetup({
 //remove ajax
 function removeRow(id, url) {
     if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
-        $.ajax({
-            type: 'DELETE',
+        $.ajax({type: 'DELETE',
             datatype: 'json',
             data: {
                 id
@@ -49,3 +48,31 @@ $('#upload').change(function () {
         }
     });
 });
+
+// //active product status
+// $('.product-active-btn').click(function () {
+//     alert('Product active');
+// });
+
+//change product status
+function changeProductStatus(id, url, status) {
+    if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái không?')){
+        $.ajax({
+            type: 'GET',
+            datatype: 'json',
+            data: {
+                id,
+                status
+            },
+            url: url,
+            success: function (result) {
+                if (result.error === false) {
+                    alert(result.message);
+                    $(".table").load(location.href + " .table>*", "");
+                } else {
+                    alert('Thay đổi trạng thái không thành công, vui lòng thử lại');
+                }
+            }
+        });
+    }
+}

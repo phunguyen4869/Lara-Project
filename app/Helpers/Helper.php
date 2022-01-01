@@ -17,7 +17,7 @@ class Helper
                     <td>' . self::parentCategory($category->parent_id) . '</td>
                     <td>' . $category->description . '</td>
                     <td>' . $category->content . '</td>
-                    <td>' . self::active($category->active) . '</td>
+                    <td>' . self::active($category->active, 'categories', $category->id) . '</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="edit/' . $category->id . '">
                             <i class="far fa-edit"></i>
@@ -73,8 +73,8 @@ class Helper
         return $id == 0 ? 'Root' : $id;
     }
 
-    public static function active($active = 0)
+    public static function active($active = 0, $location = null, $id = null)
     {
-        return $active == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
+        return $active == 1 ? '<span class="badge badge-success product-active-btn" style="cursor: pointer" onclick="changeProductStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 0)">Active</span>' : '<span class="badge badge-danger product-active-btn" style="cursor: pointer" onclick="changeProductStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 1)">Inactive</span>';
     }
 }

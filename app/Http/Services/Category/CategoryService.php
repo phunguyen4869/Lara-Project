@@ -85,4 +85,17 @@ class CategoryService
             return false;
         }
     }
+
+    public function changeStatus($request)
+    {
+        $category = Category::where('id', $request->input('id'))->first();
+
+        if ($category) {
+            $category->active = $request->input('status');
+            $category->save();
+            return true;
+        }
+
+        return false;
+    }
 }

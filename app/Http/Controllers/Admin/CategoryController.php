@@ -76,4 +76,21 @@ class CategoryController extends Controller
 
         return redirect('/admin/categories/list');
     }
+
+    public function changeStatus(Request $request)
+    {
+        $result = $this->categoryService->changeStatus($request);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Thay đổi trạng thái thành công'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Thay đổi trạng thái thất bại'
+            ]);
+        }
+    }
 }

@@ -81,6 +81,11 @@ Route::prefix('admin')->group(function () {
                 'edit/{category}',
                 [CategoryController::class, 'update']
             );
+            //route to change category status
+            Route::get(
+                'changeStatus',
+                [CategoryController::class, 'changeStatus']
+            );
         });
 
         //product routes
@@ -114,6 +119,11 @@ Route::prefix('admin')->group(function () {
             Route::delete(
                 'destroy',
                 [ProductController::class, 'destroy']
+            );
+            //route to change product status
+            Route::get(
+                'changeStatus',
+                [ProductController::class, 'changeStatus']
             );
         });
 

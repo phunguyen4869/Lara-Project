@@ -93,4 +93,17 @@ class ProductAdminService
 
         return false;
     }
+
+    public function changeStatus($request)
+    {
+        $product = Product::where('id', $request->input('id'))->first();
+
+        if ($product) {
+            $product->active = $request->input('status');
+            $product->save();
+            return true;
+        }
+
+        return false;
+    }
 }

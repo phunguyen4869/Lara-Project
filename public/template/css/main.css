@@ -2160,8 +2160,8 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .stext-104 {
-  font-family: Poppins-Regular;
-  font-size: 14px;
+  font-family: FiraSansCondensed-Regular;
+  font-size: 18px;
   line-height: 1.466667;
 }
 
@@ -2354,7 +2354,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .ltext-103 {
-  font-family: Poppins-Bold;
+  font-family: FiraSansCondensed-Bold;
   font-size: 36px;
   line-height: 1.1;
   text-transform: uppercase;
