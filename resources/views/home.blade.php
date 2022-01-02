@@ -122,7 +122,7 @@
                                         {{ number_format($product->price) }}
                                     </span>
                                     <span class="stext-105 cl3">
-                                        @if ($product->price_sale > 0)
+                                        @if ($product->price_sale)
                                             {{ 'SALE: ' . number_format($product->price_sale) }}
                                         @endif
                                     </span>
