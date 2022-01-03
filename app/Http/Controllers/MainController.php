@@ -9,7 +9,6 @@ use App\Http\Services\Product\ProductService;
 class MainController extends Controller
 {
     protected $sliders;
-    protected $categories;
     protected $products;
 
     public function __construct(SliderService $sliderService, ProductService $products)
@@ -24,6 +23,44 @@ class MainController extends Controller
             'title' => 'Trang chủ',
             'sliders' => $this->sliders->show(),
             'products' => $this->products->get(),
+        ]);
+    }
+
+    public function showProductModal(Request $request)
+    {
+        $product = $this->products->show($request->id);
+
+        $product->price = number_format($product->price);
+        $product->price_sale = number_format($product->price_sale);
+
+        if ($product) {
+            return response()->json([
+                'error' => false,
+                'data' => $product,
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+            ]);
+        }
+    }
+
+    public function loadMore(Request $request)
+    {
+        $products = $this->products->get($request->page);
+
+        if (count($products) != 0) {
+            $html = view('products.list', [
+                'products' => $products,
+            ])->render();
+
+            return response()->json([
+                'html' => $html,
+            ]);
+        }
+
+        return response()->json([
+            'html' => '',
         ]);
     }
 }

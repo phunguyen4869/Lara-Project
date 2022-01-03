@@ -168,6 +168,12 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/', [MainController::class, 'index']);
 
+//show product modal
+Route::get('/productModal', [MainController::class, 'showProductModal']);
+
+//load more products
+Route::get('/loadmore', [MainController::class, 'loadMore']);
+
 //logout route
 Route::get(
     'logout',
