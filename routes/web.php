@@ -94,7 +94,7 @@ Route::prefix('admin')->group(function () {
             Route::get(
                 'list',
                 [ProductController::class, 'index']
-            )->name('products.index');
+            );
             //route to create product
             Route::get(
                 'add',
