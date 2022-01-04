@@ -24,7 +24,13 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{!! $product->content !!}</td>
-                    <td>{{ $product->category->name }}</td>
+                    <td>
+                        @if (isset($product->category->name))
+                            {{ $product->category->name }}
+                        @else
+                            {{ 'Không có danh mục' }}
+                        @endif
+                    </td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->price_sale }}</td>
                     <td>{!! App\Helpers\Helper::active($product->active, 'products', $product->id) !!}</td>
