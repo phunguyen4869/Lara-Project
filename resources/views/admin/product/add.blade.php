@@ -5,14 +5,15 @@
 @endsection
 
 @section('content')
-@include('admin.alert')
+    @include('admin.alert')
     <form action="add" method="POST">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="category">Tên Sản Phẩm</label>
-                        <input type="text" name="name" value="{{ old('name') }}" class="form-control"  placeholder="Nhập tên sản phẩm">
+                        <input type="text" name="name" value="{{ old('name') }}" class="form-control"
+                            placeholder="Nhập tên sản phẩm">
                     </div>
                 </div>
 
@@ -20,8 +21,10 @@
                     <div class="form-group">
                         <label>Danh Mục</label>
                         <select class="form-control" name="category_id">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @foreach ($categories as $category)
+                                @if ($category->parent_id != 0)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -32,14 +35,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="category">Giá Gốc</label>
-                        <input type="number" name="price" value="{{ old('price') }}"  class="form-control" >
+                        <input type="number" name="price" value="{{ old('price') }}" class="form-control">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="category">Giá Giảm</label>
-                        <input type="number" name="price_sale" value="{{ old('price_sale') }}"  class="form-control" >
+                        <input type="number" name="price_sale" value="{{ old('price_sale') }}" class="form-control">
                     </div>
                 </div>
             </div>
@@ -56,7 +59,7 @@
 
             <div class="form-group">
                 <label for="category">Ảnh Sản Phẩm</label>
-                <input type="file"  class="form-control" id="upload">
+                <input type="file" class="form-control" id="upload">
                 <div id="image_show">
 
                 </div>
@@ -70,7 +73,7 @@
                     <label for="active" class="custom-control-label">Có</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value="0" type="radio" id="no_active" name="active" >
+                    <input class="custom-control-input" value="0" type="radio" id="no_active" name="active">
                     <label for="no_active" class="custom-control-label">Không</label>
                 </div>
             </div>

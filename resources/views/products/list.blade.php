@@ -1,6 +1,6 @@
 <div class="row isotope-grid">
     @foreach ($products as $product)
-        <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $product->category->slug }}">
+        <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
             <!-- Block2 -->
             <div class="block2">
                 <div class="block2-pic hov-img0">

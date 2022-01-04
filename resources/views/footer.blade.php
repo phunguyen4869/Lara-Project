@@ -9,7 +9,7 @@
 
                  <ul>
                      @foreach ($categories as $category)
-                         <a href="{{ $category->slug }}">
+                         <a href="{{$category->id}}-{{ $category->slug }}">
                              <li>{{ $category->name }}</li>
                          </a>
                      @endforeach

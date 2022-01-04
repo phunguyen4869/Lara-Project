@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\MainCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\LoginController;
-use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,6 +174,9 @@ Route::get('/productModal', [MainController::class, 'showProductModal']);
 
 //load more products
 Route::get('/loadmore', [MainController::class, 'loadMore']);
+
+//category page
+Route::get('/category/{id}-{slug}', [MainCategoryController::class, 'index']);
 
 //logout route
 Route::get(

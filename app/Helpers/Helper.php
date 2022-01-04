@@ -43,7 +43,7 @@ class Helper
             if ($category->parent_id == $parent_id) {
                 $html .= '
                         <li>
-                            <a href="/danhmuc/' . $category->id . '-' . Str::slug($category->name, '-') . '.html">' . $category->name . '</a>';
+                            <a href="/category/' . $category->id . '-' . $category->slug . '">' . $category->name . '</a>';
                 if (self::isChild($categories, $category->id) && $isMobile == false) {
                     $html .= '<ul class="sub-menu">' . self::headerCategories($categories, $category->id) . '</ul>';
                 } elseif (self::isChild($categories, $category->id) && $isMobile == true) {
