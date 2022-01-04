@@ -295,7 +295,6 @@ function showModal(id) {
                 $('.js-name-detail').text(result.data.name);
                 $('.js-price').text(result.data.price);
                 $('.js-description').text(result.data.description);
-                $('.js-content').html(result.data.content);
                 $('.js-img').attr('src', result.data.thumb);
                 $('.js-img-hr').attr('href', result.data.thumb);
                 $('.js-slick-data').html('<div class="item-slick3" data-thumb="' + result.data.thumb + '"><div class="wrap-pic-w pos-relative"><img src="' + result.data.thumb + '" alt="IMG-PRODUCT"><a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="' + result.data.thumb + '"><i class="fa fa-expand"></i></a></div></div>');

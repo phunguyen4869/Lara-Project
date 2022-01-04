@@ -77,37 +77,37 @@
                                 </li>
 
                                 <li class="p-b-6">
-                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => null, 'maxPrice' => '50000']) }}"
+                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => null, 'maxPrice' => '100000']) }}"
                                         class="filter-link stext-106 trans-04">
-                                        $0.00 - $50,000.00
+                                        $0.00 - $100,000.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
-                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '50000', 'maxPrice' => '100000']) }}"
+                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '100000', 'maxPrice' => '1000000']) }}"
                                         class="filter-link stext-106 trans-04">
-                                        $50,000.00 - $100,000.00
+                                        $100,000.00 - $1,000,000.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
-                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '100000', 'maxPrice' => '150000']) }}"
+                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '1000000', 'maxPrice' => '10000000']) }}"
                                         class="filter-link stext-106 trans-04">
-                                        $100,000.00 - $150,000.00
+                                        $1,000,000.00 - $10,000,000.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
-                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '150000', 'maxPrice' => '200000']) }}"
+                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '10000000', 'maxPrice' => '20000000']) }}"
                                         class="filter-link stext-106 trans-04">
-                                        $150,000.00 - $200,000.00
+                                        $10,000,000.00 - $20,000,000.00
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
-                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '200000', 'maxPrice' => null]) }}"
+                                    <a href="{{ request()->fullUrlWithQuery(['minPrice' => '20000000', 'maxPrice' => null]) }}"
                                         class="filter-link stext-106 trans-04">
-                                        $200,000.00+
+                                        $20,000,000.00+
                                     </a>
                                 </li>
                             </ul>

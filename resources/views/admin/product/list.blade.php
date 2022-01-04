@@ -7,11 +7,10 @@
             <tr>
                 <th>ID</th>
                 <th>Tên</th>
-                <th>Mô tả</th>
-                <th>Nội dung</th>
                 <th>Danh mục</th>
                 <th>Giá</th>
                 <th>Giá sale</th>
+                <th>Ảnh</th>
                 <th>Active</th>
                 <th width="10%">Action</th>
             </tr>
@@ -22,17 +21,26 @@
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{!! $product->content !!}</td>
                     <td>
-                        @if (isset($product->category->name))
+                        @if ($product->category->name)
                             {{ $product->category->name }}
                         @else
                             {{ 'Không có danh mục' }}
                         @endif
                     </td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->price_sale }}</td>
+                    <td>{{ number_format($product->price) }}</td>
+                    <td>
+                        @if ($product->price_sale)
+                            {{ number_format($product->price_sale) }}
+                        @else
+                            {{ 'Không có giá sale' }}
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ $product->thumb }}" target="_blank">
+                            <img src="{{ $product->thumb }}" alt="image" width="50px">
+                        </a>
+                    </td>
                     <td>{!! App\Helpers\Helper::active($product->active, 'products', $product->id) !!}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="edit/{{ $product->id }}">

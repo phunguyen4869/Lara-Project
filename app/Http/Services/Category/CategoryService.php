@@ -98,4 +98,31 @@ class CategoryService
 
         return false;
     }
+
+    public function getById($id)
+    {
+        return Category::where('id', $id)->where('active', 1)->firstOrFail();
+    }
+
+    public function getProductByCategory($category, $sortBy, $minPrice, $maxPrice)
+    {
+        $query = $category->products()
+            ->select('id', 'name', 'price', 'price_sale', 'thumb')
+            ->where('active', 1);
+        if (isset($sortBy)) {
+            $query->orderBy('price', $sortBy);
+        }else {
+            $query->orderBy('id', 'asc');
+        }
+        if (isset($minPrice) && isset($maxPrice)) {
+            $query->whereBetween('price', [$minPrice, $maxPrice]);
+        } elseif (isset($minPrice) && !isset($maxPrice)) {
+            $query->where('price', '>=', $minPrice);
+        } elseif (isset($maxPrice) && !isset($minPrice)) {
+            $query->where('price', '<=', $maxPrice);
+        }
+
+        return $query
+            ->paginate(4);
+    }
 }

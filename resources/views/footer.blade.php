@@ -174,9 +174,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                          <p class="stext-102 cl3 p-t-23 js-description">
                          </p>
 
-                         <p class="stext-102 cl3 p-t-23 js-content">
-                         </p>
-
                          <!--  -->
                          <div class="p-t-33">
                              <div class="flex-w flex-r-m p-b-10">
