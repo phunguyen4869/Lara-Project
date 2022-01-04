@@ -8,21 +8,25 @@ class UploadService
     {
         try {
             //Kiểm tra file có tồn tại hay không
-            if ($request->hasFile('file')) {
-
-                //Lấy tên gốc của file
-                $name = $request->file('file')->getClientOriginalName();
-
-                //Tạo tên thư mục chứa file
+            if ($request->hasFile('files')) {
+                //Tạo tên thư mục chứa file theo ngày
                 $path = 'uploads/' . date("Y/m/d");
 
-                //Lưu trữ file vào thư mục storage/app/uploads với tên là $name
-                $request->file('file')->storeAs(
-                    'public/' . $path,
-                    $name
-                );
+                //Lấy tên gốc của các file
+                $fileCount = count($request->file('files'));
+                for ($i = 0; $i < $fileCount; $i++) {
+                    $name[] = $request
+                        ->file('files')[$i]
+                        ->getClientOriginalName();
 
-                return '/storage/' . $path . '/' . $name;
+                    //Lưu file vào thư mục
+                    $request->file('files')[$i]->storeAs(
+                        'public/' . $path,
+                        $name[$i]
+                    );
+                    $url[] = '/storage/' . $path . '/' . $name[$i];
+                }
+                return $url;
             }
         } catch (\Exception $error) {
             return false;

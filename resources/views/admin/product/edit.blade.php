@@ -65,11 +65,13 @@
 
             <div class="form-group">
                 <label for="category">Ảnh Sản Phẩm</label>
-                <input type="file" class="form-control" id="upload">
-                <div id="image_show">
-                    <a href="{{ $product->thumb }}" target="_blank">
-                        <img src="{{ $product->thumb }}" width="100px">
-                    </a>
+                <input type="file" class="form-control" id="upload_multiple" multiple>
+                <div id="image_show_multi">
+                    @foreach (explode(',', $product->thumb) as $thumb)
+                        <a href="{{ $thumb }}" target="_blank">
+                            <img src="{{ $thumb }}" alt="image" width="50px">
+                        </a>
+                    @endforeach
                 </div>
                 <input type="hidden" name="thumb" value="{{ $product->thumb }}" id="thumb">
             </div>

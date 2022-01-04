@@ -37,8 +37,19 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ $product->thumb }}" target="_blank">
-                            <img src="{{ $product->thumb }}" alt="image" width="50px">
+                        {{-- @if (count(explode(',', $product->thumb)) > 1)
+                            @foreach (explode(',', $product->thumb) as $thumb)
+                                <a href="{{ $thumb }}" target="_blank">
+                                    <img src="{{ $thumb }}" alt="image" width="50px">
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="{{ $product->thumb }}" target="_blank">
+                                <img src="{{ $product->thumb }}" alt="image" width="50px">
+                            </a>
+                        @endif --}}
+                        <a href="{!! App\Helpers\Helper::separateImage($product->thumb) !!}" target="_blank">
+                            <img src="{!! App\Helpers\Helper::separateImage($product->thumb) !!}" alt="image" width="50px">
                         </a>
                     </td>
                     <td>{!! App\Helpers\Helper::active($product->active, 'products', $product->id) !!}</td>

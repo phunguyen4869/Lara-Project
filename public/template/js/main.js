@@ -291,7 +291,6 @@ function showModal(id) {
         url: '/productModal',
         success: function (result) {
             if (result.error === false) {
-                console.log(result.data);
                 $('.js-name-detail').text(result.data.name);
                 $('.js-price').text(result.data.price);
                 $('.js-description').text(result.data.description);

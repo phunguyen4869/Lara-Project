@@ -59,8 +59,8 @@
 
             <div class="form-group">
                 <label for="category">Ảnh Sản Phẩm</label>
-                <input type="file" class="form-control" id="upload">
-                <div id="image_show">
+                <input type="file" class="form-control" id="upload_multiple" multiple>
+                <div id="image_show_multi">
 
                 </div>
                 <input type="hidden" name="thumb" id="thumb">

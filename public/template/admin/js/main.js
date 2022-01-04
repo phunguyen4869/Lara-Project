@@ -26,10 +26,10 @@ function removeRow(id, url) {
     }
 }
 
-//Upload file
+//Upload single image
 $('#upload').change(function () {
     const form = new FormData();
-    form.append('file', $(this)[0].files[0]);
+    form.append('files[]', $(this)[0].files[0]);
     $.ajax({
         contentType: false,
         processData: false,
@@ -48,6 +48,37 @@ $('#upload').change(function () {
         }
     });
 });
+
+//upload multiple images
+$('#upload_multiple').change(function () {
+    $('#image_show_multi').html('');
+    const form = new FormData();
+    var filesCount = $(this)[0].files.length;
+    for (var i = 0; i < filesCount; i++) {
+        form.append('files[]', $(this)[0].files[i]);
+    }
+    $.ajax({
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        datatype: 'JSON',
+        data: form,
+        url: '/admin/upload/services',
+        success: function (results) {
+            console.log(results.url[0]);
+            if (results.error === false) {
+                for (let i = 0; i < filesCount; i++) {
+                    $('#image_show_multi').append('<a href="' + results.url[i] + '" target="_blank"><img src="' + results.url[i] + '" width="100px"></a>');
+                }
+
+                $('#thumb').val(results.url);
+            } else {
+                alert('Upload không thành công, vui lòng thử lại');
+            }
+        }
+    });
+});
+
 
 // //active product status
 // $('.product-active-btn').click(function () {

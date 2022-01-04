@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Product\ProductService;
@@ -32,6 +33,8 @@ class MainController extends Controller
 
         $product->price = number_format($product->price);
         $product->price_sale = number_format($product->price_sale);
+
+        $product->thumb = Helper::separateImage($product->thumb);
 
         if ($product) {
             return response()->json([

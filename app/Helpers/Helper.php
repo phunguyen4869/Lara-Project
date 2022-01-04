@@ -77,4 +77,9 @@ class Helper
     {
         return $active == 1 ? '<span class="badge badge-success product-active-btn" style="cursor: pointer" onclick="changeProductStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 0)">Active</span>' : '<span class="badge badge-danger product-active-btn" style="cursor: pointer" onclick="changeProductStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 1)">Inactive</span>';
     }
+
+    public static function separateImage($images, $location = 0){
+        $image = explode(',', $images);
+        return $image[$location];
+    }
 }
