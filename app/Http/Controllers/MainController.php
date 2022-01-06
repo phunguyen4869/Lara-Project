@@ -34,9 +34,7 @@ class MainController extends Controller
         $product->price = number_format($product->price);
         $product->price_sale = number_format($product->price_sale);
 
-        $product->thumb = Helper::separateImage($product->thumb);
-
-        if ($product) {
+        if (!empty($product)) {
             return response()->json([
                 'error' => false,
                 'data' => $product,

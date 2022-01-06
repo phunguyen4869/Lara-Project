@@ -9,7 +9,7 @@
 
                  <ul>
                      @foreach ($categories as $category)
-                         <a href="{{$category->id}}-{{ $category->slug }}">
+                         <a href="{{ $category->id }}-{{ $category->slug }}">
                              <li>{{ $category->name }}</li>
                          </a>
                      @endforeach
@@ -193,7 +193,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
  </div>
 
  <!--===============================================================================================-->
- <script src="/template/vendor/jquery/jquery-3.2.1.min.js"></script>
+ <script src="/template/vendor/jquery/jquery-3.6.0.min.js"></script>
  <!--===============================================================================================-->
  <script src="/template/vendor/animsition/js/animsition.min.js"></script>
  <!--===============================================================================================-->

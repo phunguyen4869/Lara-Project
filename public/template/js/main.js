@@ -273,6 +273,10 @@
     [ Hide modal1 ]*/
     $('.js-hide-modal1').on('click', function () {
         $('.js-modal1').removeClass('show-modal1');
+
+        $('.wrap-slick3').each(function () {
+            $(this).find('.slick3').slick('unslick');
+        });
     });
 
 })(jQuery);
@@ -291,12 +295,20 @@ function showModal(id) {
         url: '/productModal',
         success: function (result) {
             if (result.error === false) {
+                let thumbs = result.data.thumb.split(',');
+                let html = '';
+
                 $('.js-name-detail').text(result.data.name);
                 $('.js-price').text(result.data.price);
                 $('.js-description').text(result.data.description);
                 $('.js-img').attr('src', result.data.thumb);
                 $('.js-img-hr').attr('href', result.data.thumb);
-                $('.js-slick-data').html('<div class="item-slick3" data-thumb="' + result.data.thumb + '"><div class="wrap-pic-w pos-relative"><img src="' + result.data.thumb + '" alt="IMG-PRODUCT"><a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="' + result.data.thumb + '"><i class="fa fa-expand"></i></a></div></div>');
+
+                for (let i = 0; i < thumbs.length; i++) {
+                    html = html + '<div class="item-slick3" data-thumb="' + thumbs[i] + '"><div class="wrap-pic-w pos-relative"><img src="' + thumbs[i] + '" alt="IMG-PRODUCT"><a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="' + thumbs[i] + '"><i class="fa fa-expand"></i></a></div></div>';
+                }
+                $('.js-slick-data').html(html);
+
                 if (result.data.price_sale != 0) {
                     $('.js-price-sale').text('SALE: ' + result.data.price_sale);
                 } else {
@@ -306,6 +318,31 @@ function showModal(id) {
             } else {
                 alert('Có lỗi xảy ra');
             }
+        },
+        complete: function () {
+            $('.wrap-slick3').each(function () {
+                $(this).find('.slick3').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    fade: true,
+                    infinite: true,
+                    autoplay: false,
+                    autoplaySpeed: 6000,
+
+                    arrows: true,
+                    appendArrows: $(this).find('.wrap-slick3-arrows'),
+                    prevArrow: '<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
+                    nextArrow: '<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right" aria-hidden="true"></i></button>',
+
+                    dots: true,
+                    appendDots: $(this).find('.wrap-slick3-dots'),
+                    dotsClass: 'slick3-dots',
+                    customPaging: function (slick, index) {
+                        var portrait = $(slick.$slides[index]).data('thumb');
+                        return '<img src=" ' + portrait + ' "/><div class="slick3-dot-overlay"></div>';
+                    },
+                });
+            });
         }
     });
 }
@@ -320,8 +357,8 @@ function loadmore() {
         },
         url: '/loadmore',
         success: function (result) {
-            console.log(page);
-            console.log(result.html);
+            // console.log(page);
+            // console.log(result.html);
             if (result.html !== '') {
                 $('#js-product-list').append(result.html);
                 $('#page').val(parseInt(page) + 1);
