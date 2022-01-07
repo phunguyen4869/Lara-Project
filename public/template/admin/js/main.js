@@ -86,7 +86,7 @@ $('#upload_multiple').change(function () {
 // });
 
 //change product status
-function changeProductStatus(id, url, status) {
+function changeStatus(id, url, status) {
     if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái không?')){
         $.ajax({
             type: 'GET',

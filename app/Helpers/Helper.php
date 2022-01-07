@@ -75,7 +75,7 @@ class Helper
 
     public static function active($active = 0, $location = null, $id = null)
     {
-        return $active == 1 ? '<span class="badge badge-success product-active-btn" style="cursor: pointer" onclick="changeProductStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 0)">Active</span>' : '<span class="badge badge-danger product-active-btn" style="cursor: pointer" onclick="changeProductStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 1)">Inactive</span>';
+        return $active == 1 ? '<span class="badge badge-success product-active-btn" style="cursor: pointer" onclick="changeStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 0)">Active</span>' : '<span class="badge badge-danger product-active-btn" style="cursor: pointer" onclick="changeStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 1)">Inactive</span>';
     }
 
     public static function separateImage($images, $location = 0){
