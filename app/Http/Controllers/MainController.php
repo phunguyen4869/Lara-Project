@@ -46,6 +46,23 @@ class MainController extends Controller
         }
     }
 
+    public function showProductDetail($id = '', $slug = '')
+    {
+        $product = $this->products->show($id);
+        $productsMore = $this->products->more($id, $product->category_id);
+
+        $product->price = number_format($product->price);
+        $product->price_sale = number_format($product->price_sale);
+
+        $product->thumb = explode(',', $product->thumb);
+
+        return view('products.detail', [
+            'title' => $product->name,
+            'product' => $product,
+            'productsMore' => $productsMore,
+        ]);
+    }
+
     public function loadMore(Request $request)
     {
         $products = $this->products->get($request->page);

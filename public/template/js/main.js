@@ -297,6 +297,9 @@ function showModal(id) {
             if (result.error === false) {
                 let thumbs = result.data.thumb.split(',');
                 let html = '';
+                $('.wrap-slick3').each(function () {
+                    $(this).find('.slick3').slick('unslick');
+                });
 
                 $('.js-name-detail').text(result.data.name);
                 $('.js-price').text(result.data.price);

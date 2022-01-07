@@ -14,9 +14,9 @@ class MainCategoryController extends Controller
         $this->category = $category;
     }
 
-    public function index(Request $request, $id, $slug)
+    public function index(Request $request)
     {
-        $category = $this->category->getById($id);
+        $category = $this->category->getById($request->id);
 
         if ($category->parent_id != 0) {
             $sortBy = $request->price;

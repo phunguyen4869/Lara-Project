@@ -28,13 +28,12 @@ class ProductService
             ->firstOrFail();
     }
 
-    public function more($id)
+    public function more($id, $category_id)
     {
         return Product::select('id', 'name', 'price', 'price_sale', 'thumb')
             ->where('active', 1)
             ->where('id', '!=', $id)
-            ->orderByDesc('id')
-            ->limit(8)
+            ->where('category_id', $category_id)
             ->get();
     }
 }

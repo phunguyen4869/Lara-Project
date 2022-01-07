@@ -178,6 +178,9 @@ Route::get('/loadmore', [MainController::class, 'loadMore']);
 //category page
 Route::get('/category/{id}-{slug}', [MainCategoryController::class, 'index']);
 
+//product detail page
+Route::get('product/{id}-{slug}', [MainController::class, 'showProductDetail']);
+
 //logout route
 Route::get(
     'logout',

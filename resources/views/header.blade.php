@@ -1,5 +1,5 @@
 <!-- Header -->
-<header>
+<header class="header-v2">
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
