@@ -66,4 +66,17 @@ class SliderService
 
         return false;
     }
+
+    public function changeStatus($request)
+    {
+        $slider = Slider::where('id', $request->input('id'))->first();
+
+        if ($slider) {
+            $slider->active = $request->input('status');
+            $slider->save();
+            return true;
+        }
+
+        return false;
+    }
 }

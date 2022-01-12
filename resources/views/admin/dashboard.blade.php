@@ -1,5 +1,5 @@
 @extends('admin.main')
 
 @section('content')
-    Bonk
+    Bonk!!! {{$name}}
 @endsection

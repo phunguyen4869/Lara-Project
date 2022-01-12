@@ -25,7 +25,7 @@
                             <img src="{{ $slider->thumb }}" alt="image" width="50px">
                         </a>
                     </td>
-                    <td>{!! App\Helpers\Helper::active($slider->active) !!}</td>
+                    <td>{!! App\Helpers\Helper::active($slider->active, 'sliders', $slider->id) !!}</td>
                     <td>{{ $slider->updated_at }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="edit/{{ $slider->id }}">

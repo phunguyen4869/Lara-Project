@@ -106,6 +106,59 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-user"></i>
+                                <p>
+                                    Danh sách User
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/user/add') }}" class="nav-link">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Thêm User</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/user/list') }}" class="nav-link">
+                                        <i class="fas fa-stream"></i>
+                                        <p>Danh sách User</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-lock"></i>
+                                <p>
+                                    Quản lí Role
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/user/roles/add') }}" class="nav-link">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Thêm Role</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/user/roles/list') }}" class="nav-link">
+                                        <i class="fas fa-stream"></i>
+                                        <p>Danh sách Roles</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item d-sm-inline-block">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>

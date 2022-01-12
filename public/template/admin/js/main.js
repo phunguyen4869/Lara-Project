@@ -8,7 +8,8 @@ $.ajaxSetup({
 //remove ajax
 function removeRow(id, url) {
     if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
-        $.ajax({type: 'DELETE',
+        $.ajax({
+            type: 'DELETE',
             datatype: 'json',
             data: {
                 id
@@ -20,6 +21,29 @@ function removeRow(id, url) {
                     $(".table").load(location.href + " .table>*", "");
                 } else {
                     alert('Xoá không thành công, vui lòng thử lại');
+                }
+            }
+        });
+    }
+}
+
+//remove permission of role ajax
+function removePermission(roleID, permissionID, url) {
+    if (confirm('Bạn có chắc chắn muốn thu hồi permission không?')) {
+        $.ajax({
+            type: 'DELETE',
+            datatype: 'json',
+            data: {
+                roleID,
+                permissionID
+            },
+            url: url,
+            success: function (result) {
+                if (result.error === false) {
+                    alert(result.message);
+                    $(".table").load(location.href + " .table>*", "");
+                } else {
+                    alert('Thu hồi không thành công, vui lòng thử lại');
                 }
             }
         });
@@ -87,7 +111,7 @@ $('#upload_multiple').change(function () {
 
 //change product status
 function changeStatus(id, url, status) {
-    if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái không?')){
+    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái không?')) {
         $.ajax({
             type: 'GET',
             datatype: 'json',

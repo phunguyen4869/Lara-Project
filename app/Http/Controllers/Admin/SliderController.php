@@ -83,4 +83,21 @@ class SliderController extends Controller
             ]);
         }
     }
+
+    public function changeStatus(Request $request)
+    {
+        $result = $this->SliderService->changeStatus($request);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Thay đổi trạng thái thành công'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Thay đổi trạng thái thất bại'
+            ]);
+        }
+    }
 }
