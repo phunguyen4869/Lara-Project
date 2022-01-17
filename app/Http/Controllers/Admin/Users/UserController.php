@@ -76,7 +76,6 @@ class UserController extends Controller
 
     public function roleUpdate(Request $request)
     {
-        //dd($request->input());
         $result = $this->roles->roleUpdate($request);
 
         if ($result) {

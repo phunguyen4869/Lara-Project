@@ -63,7 +63,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-trailer"></i>
                                 <p>
-                                    Danh mục sản phẩm
+                                    Danh sách sản phẩm
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
