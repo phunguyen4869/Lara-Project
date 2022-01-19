@@ -66,8 +66,6 @@ class PermissionsSeeder extends Seeder
             'show product',
             'create product',
             'edit product',
-            'show user',
-            'edit user',
         ]);
 
         $role = Role::create(['name' => 'member']);
