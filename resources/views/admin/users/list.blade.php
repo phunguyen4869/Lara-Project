@@ -9,6 +9,7 @@
                 <th>Tên</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Verify status</th>
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -21,6 +22,11 @@
                     @foreach ($user->roles as $role)
                         <td>{{ $role->name }}</td>
                     @endforeach
+                    @if ($user->email_verified_at != null)
+                        <td>Verified at {{ $user->email_verified_at }}</td>
+                    @else
+                        <td>Not verified</td>
+                    @endif
                     <td>
                         <a class="btn btn-primary btn-sm" href="edit/{{ $user->id }}">
                             <i class="far fa-edit"></i>

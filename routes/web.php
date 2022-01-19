@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
@@ -59,6 +60,27 @@ Route::prefix('admin')->group(function () {
         [RegisterController::class, 'store']
     );
 
+    //route to verify email notice
+    Route::get('/email/verify', function () {
+        return view('admin.users.verify-email', [
+            'title' => 'Verify Email',
+        ]);
+    })->middleware('auth')->name('verification.notice');
+
+    //route to verify email
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect('/admin/dashboard')->with('status', 'Your e-mail is verified!');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    //route to resend email verification
+    Route::post('email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
     Route::get('forgot-password', function () {
         return view(
             'admin.users.forgot-password',
@@ -81,8 +103,10 @@ Route::prefix('admin')->group(function () {
     })->middleware('guest')->name('password.email');
 
     Route::get('reset-password/{token}', function ($token) {
-        return view('admin.users.reset-password',
-         ['title' => 'Reset Password', 'token' => $token]);
+        return view(
+            'admin.users.reset-password',
+            ['title' => 'Reset Password', 'token' => $token]
+        );
     })->middleware('guest')->name('password.reset');
 
     Route::post('reset-password', function (Request $request) {
@@ -111,7 +135,7 @@ Route::prefix('admin')->group(function () {
     })->middleware('guest')->name('password.update');
 
     //middleware group
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
         //get route to dashboard page
         Route::get(
             'dashboard',
@@ -243,7 +267,7 @@ Route::prefix('admin')->group(function () {
                 );
             });
 
-            Route::middleware('role:admin', 'role:moderator')->group(function () {
+            Route::middleware('role:admin|moderator')->group(function () {
                 //route to change category status
                 Route::get(
                     'changeStatus',
@@ -290,7 +314,7 @@ Route::prefix('admin')->group(function () {
                 );
             });
 
-            Route::middleware('role:admin', 'role:moderator')->group(function () {
+            Route::middleware('role:admin|moderator')->group(function () {
                 //route to change product status
                 Route::get(
                     'changeStatus',
@@ -353,7 +377,7 @@ Route::prefix('admin')->group(function () {
                 );
             });
 
-            Route::middleware('role:admin', 'role:moderator')->group(function () {
+            Route::middleware('role:admin|moderator')->group(function () {
                 //route to change slider status
                 Route::get(
                     'changeStatus',

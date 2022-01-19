@@ -1,5 +1,6 @@
 @extends('admin.main')
 
 @section('content')
-    Bonk!!! {{$name}}
+    @include('admin.alert')
+    Bonk!!! {{ $name }}
 @endsection

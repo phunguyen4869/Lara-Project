@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Users;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
@@ -15,7 +16,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $this->validate($request, [
             //check email and password is valid
             'email' => 'required|email:filter|unique:users,email',
@@ -30,6 +32,8 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('member');
+
+        event(new Registered($user));
 
         return redirect()->route('login');
     }

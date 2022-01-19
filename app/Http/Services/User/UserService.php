@@ -64,11 +64,12 @@ class UserService
     public function destroy($request)
     {
         try {
-            User::destroy($request->id);
-
-            Session::flash('success', 'Xóa User thành công');
+            if ($request->id == 1) {
+                return  false;
+            } else {
+                User::destroy($request->id);
+            }
         } catch (\Exception $error) {
-            Session::flash('error', 'Xóa User lỗi');
             Log::error($error->getMessage());
             return  false;
         }

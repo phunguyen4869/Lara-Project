@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Users;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Roles\RolesService;
@@ -124,6 +125,8 @@ class UserController extends Controller
         if ($result) {
             $user = $this->user->getByEmail($request->email);
             $user->assignRole($request->role);
+
+            event(new Registered($user));
 
             return redirect('admin/user/list');
         } else {
