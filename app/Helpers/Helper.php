@@ -78,8 +78,26 @@ class Helper
         return $active == 1 ? '<span class="badge badge-success product-active-btn" style="cursor: pointer" onclick="changeStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 0)">Active</span>' : '<span class="badge badge-danger product-active-btn" style="cursor: pointer" onclick="changeStatus(' . $id . ', \'/admin/' . $location . '/changeStatus\', 1)">Inactive</span>';
     }
 
-    public static function separateImage($images, $location = 0){
+    public static function separateImage($images, $location = 0)
+    {
         $image = explode(',', $images);
         return $image[$location];
+    }
+
+    public static function breadcrumb($categories, $id)
+    {
+        $breadcrumb = '';
+        foreach ($categories as $category) {
+            if ($category->id == $id) {
+                $breadcrumb .= self::breadcrumb($categories, $category->parent_id);
+                //$breadcrumb .= '<li class="breadcrumb-item"><a href="/category/' . $category->id . '-' . $category->slug . '">' . $category->name . '</a></li>';
+                $breadcrumb .= '<a href="https://shop.test/category/' . $category->id . '-' . $category->slug . '"
+                class="stext-109 cl8 hov-cl1 trans-04">
+                ' . $category->name . '
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>';
+            }
+        }
+        return $breadcrumb;
     }
 }
