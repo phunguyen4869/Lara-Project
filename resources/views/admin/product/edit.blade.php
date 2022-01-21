@@ -26,12 +26,15 @@
                 <label for="category_id">Danh mục</label>
                 <select name="category_id" id="category_id" class="form-control">
                     @foreach ($categories as $category)
-                        @if ($category->parent_id != 0)
+                        {{-- @if ($category->parent_id != 0)
                             <option value="{{ $category->id }}"
                                 {{ $product->category_id == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
-                        @endif
+                        @endif --}}
+                        <option value="{{ $category->id }}"
+                            {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
                     @endforeach
                 </select>
             </div>

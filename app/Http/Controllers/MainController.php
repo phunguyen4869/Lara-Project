@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Services\Category\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Product\ProductService;
@@ -11,11 +12,13 @@ class MainController extends Controller
 {
     protected $sliders;
     protected $products;
+    protected $categories;
 
-    public function __construct(SliderService $sliderService, ProductService $products)
+    public function __construct(SliderService $sliders, ProductService $products, CategoryService $categories)
     {
-        $this->sliders = $sliderService;
+        $this->sliders = $sliders;
         $this->products = $products;
+        $this->categories = $categories;
     }
 
     public function index()
@@ -56,10 +59,13 @@ class MainController extends Controller
 
         $product->thumb = explode(',', $product->thumb);
 
+        $categories = $this->categories->getAll();
+
         return view('products.detail', [
             'title' => $product->name,
             'product' => $product,
             'productsMore' => $productsMore,
+            'categories' => $categories,
         ]);
     }
 

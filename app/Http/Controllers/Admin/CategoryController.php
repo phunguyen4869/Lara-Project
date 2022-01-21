@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         return view('admin.category.create', [
             'title' => 'Thêm danh mục mới',
-            'categories' => $this->categoryService->getParent()
+            'categories' => $this->categoryService->getAll()
         ]);
     }
 
@@ -66,7 +66,7 @@ class CategoryController extends Controller
         return view('admin.category.edit', [
             'title' => 'Sửa danh mục ' . $category->name,
             'category' => $category,
-            'categories' => $this->categoryService->getParent()
+            'categories' => $this->categoryService->getAll()
         ]);
     }
 

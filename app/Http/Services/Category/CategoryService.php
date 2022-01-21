@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryService
 {
-    public function getParent()
+    public function getParent($parent_id = 0)
     {
-        return Category::where('parent_id', 0)->get();
+        return Category::where('parent_id', $parent_id)->get();
     }
 
     public function getAll()
@@ -101,7 +101,12 @@ class CategoryService
 
     public function getById($id)
     {
-        return Category::where('id', $id)->where('active', 1)->firstOrFail();
+        return Category::where('id', $id)->orWhere('parent_id', $id)->where('active', 1)->get();
+    }
+
+    public function getCategoryName($id)
+    {
+        return Category::select('name')->where('id', $id)->first();
     }
 
     public function getProductByCategory($category, $sortBy, $minPrice, $maxPrice)
@@ -111,7 +116,7 @@ class CategoryService
             ->where('active', 1);
         if (isset($sortBy)) {
             $query->orderBy('price', $sortBy);
-        }else {
+        } else {
             $query->orderBy('id', 'asc');
         }
         if (isset($minPrice) && isset($maxPrice)) {

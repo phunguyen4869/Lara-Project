@@ -22,9 +22,11 @@
                         <label>Danh Mục</label>
                         <select class="form-control" name="category_id">
                             @foreach ($categories as $category)
-                                @if ($category->parent_id != 0)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endif
+                                {{-- @if ($category->parent_id != 0) --}}
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}
+                                </option>
+                                {{-- @endif --}}
                             @endforeach
                         </select>
                     </div>

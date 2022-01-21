@@ -16,22 +16,48 @@ class MainCategoryController extends Controller
 
     public function index(Request $request)
     {
-        $category = $this->category->getById($request->id);
+        // $categories = $this->category->getById($request->id);
 
-        if ($category->parent_id != 0) {
-            $sortBy = $request->price;
-            (isset($request->minPrice)) ? $minPrice = $request->minPrice : $minPrice = null;
-            (isset($request->maxPrice)) ? $maxPrice = $request->maxPrice : $maxPrice = null;
+        // $categoryName = $this->category->getCategoryName($request->id);
 
-            $products = $this->category->getProductByCategory($category, $sortBy, $minPrice, $maxPrice);
+        // $sortBy = $request->price;
+        // (isset($request->minPrice)) ? $minPrice = $request->minPrice : $minPrice = null;
+        // (isset($request->maxPrice)) ? $maxPrice = $request->maxPrice : $maxPrice = null;
 
-            return view('category', [
-                'title' => $category->name,
-                'category' => $category,
-                'products' => $products,
-            ]);
-        } else {
-            return redirect()->back();
+        // foreach ($categories as $value) {
+        //     $products[] = $this->category->getProductByCategory($value, $sortBy, $minPrice, $maxPrice);
+        // }
+
+        $categories = $this->category->getById($request->id);
+
+        $categoryName = $this->category->getCategoryName($request->id);
+
+        $sortBy = $request->price;
+        (isset($request->minPrice)) ? $minPrice = $request->minPrice : $minPrice = null;
+        (isset($request->maxPrice)) ? $maxPrice = $request->maxPrice : $maxPrice = null;
+
+        if (count($categories) > 1) {
+            unset($categories[0]);
         }
+
+        foreach ($categories as $value) {
+            $childCategory = $this->category->getParent($value->id);
+            //dd($childCategory);
+            if (!empty($childCategory->all())) {
+                $childCategory = $this->category->getParent($value->id);
+                foreach ($childCategory as $value) {
+                    $products[] = $this->category->getProductByCategory($value, $sortBy, $minPrice, $maxPrice);
+                }
+            } else {
+                $products[] = $this->category->getProductByCategory($value, $sortBy, $minPrice, $maxPrice);
+                //dd($childCategory);
+            }
+            //$products[] = $this->category->getProductByCategory($value, $sortBy, $minPrice, $maxPrice);
+        }
+
+        return view('category', [
+            'title' => $categoryName->name,
+            'products' => $products,
+        ]);
     }
 }
