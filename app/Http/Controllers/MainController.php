@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Http\Services\Category\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Services\Slider\SliderService;

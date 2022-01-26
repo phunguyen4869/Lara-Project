@@ -219,7 +219,7 @@
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function () {
         var numProduct = Number($(this).next().val());
-        if (numProduct > 0) $(this).next().val(numProduct - 1);
+        if (numProduct > 1) $(this).next().val(numProduct - 1);
     });
 
     $('.btn-num-product-up').on('click', function () {
@@ -306,6 +306,7 @@ function showModal(id) {
                 $('.js-description').text(result.data.description);
                 $('.js-img').attr('src', result.data.thumb);
                 $('.js-img-hr').attr('href', result.data.thumb);
+                $('#input_product_id').val(result.data.id);
 
                 for (let i = 0; i < thumbs.length; i++) {
                     html = html + '<div class="item-slick3" data-thumb="' + thumbs[i] + '"><div class="wrap-pic-w pos-relative"><img src="' + thumbs[i] + '" alt="IMG-PRODUCT"><a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="' + thumbs[i] + '"><i class="fa fa-expand"></i></a></div></div>';
@@ -371,4 +372,99 @@ function loadmore() {
             }
         }
     });
+}
+
+function addToCart() {
+    const id = $('#input_product_id').val();
+    let quantity = $('.num-product').val();
+    console.log(quantity);
+    $.ajax({
+        type: 'POST',
+        datatype: 'json',
+        data: {
+            "_token": $('#token').val(),
+            id,
+            quantity
+        },
+        url: '/addToCart',
+        success: function (result) {
+            console.log(result);
+            $('.cartProductQuantity').attr('data-notify', result.quantity);
+            $(".header-cart-content").load(location.href + " .header-cart-content>*", "");
+        }
+    });
+}
+
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'VND',
+
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+function changeQuantity(id, price, status) {
+    let quantity = $('#quantity_product_' + id).val();
+
+    if (status == 'up') {
+        quantity = parseInt(quantity) + 1;
+    } else if (status == 'down' && quantity >= 1) {
+        quantity -= 1;
+    }
+    if (quantity == 0) {
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+            $('#table_row_' + id).remove();
+            quantity = 0;
+        } else {
+            $('#quantity_product_' + id).val(parseInt(1));
+            quantity = 1;
+        }
+    }
+
+    let total = price * quantity;
+
+    total = formatter.format(total); /* $2,500.00 */
+
+    $('#total_product_price_' + id).text(total);
+
+    $.ajax({
+        type: 'GET',
+        datatype: 'json',
+        data: {
+            id,
+            quantity,
+        },
+        url: '/updateCart',
+        success: function (result) {
+            console.log(result);
+            //$('.table-shopping-cart').load(location.href + ' .table-shopping-cart');
+            result.total = formatter.format(result.total);
+            $('.total').text(result.total);
+            $('.cartProductQuantity').attr('data-notify', result.quantity);
+            $(".header-cart-content").load(location.href + " .header-cart-content>*", "");
+        }
+    });
+}
+
+function removeProduct(id) {
+    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+        $.ajax({
+            type: 'GET',
+            datatype: 'json',
+            data: {
+                id,
+            },
+            url: '/removeProduct',
+            success: function (result) {
+                console.log(result);
+                $('#table_row_' + id).remove();
+                result.total = formatter.format(result.total);
+                $('.total').text(result.total);
+                $('.cartProductQuantity').attr('data-notify', result.quantity);
+                $(".header-cart-content").load(location.href + " .header-cart-content>*", "");
+            }
+        });
+    }
 }

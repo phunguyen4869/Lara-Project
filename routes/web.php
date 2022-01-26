@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\Users\RegisterController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -403,7 +404,19 @@ Route::get('/loadmore', [MainController::class, 'loadMore']);
 Route::get('/category/{id}-{slug}', [MainCategoryController::class, 'index']);
 
 //product detail page
-Route::get('product/{id}-{slug}', [MainController::class, 'showProductDetail']);
+Route::get('/product/{id}-{slug}', [MainController::class, 'showProductDetail']);
+
+//add product to cart
+Route::post('/addToCart', [CartController::class, 'addToCart']);
+
+//change product quantity
+Route::get('/updateCart', [CartController::class, 'updateCart']);
+
+//remove product from cart
+Route::get('/removeProduct', [CartController::class, 'removeProduct']);
+
+//show cart
+Route::get('/cart', [CartController::class, 'showCart']);
 
 //logout route
 Route::get(

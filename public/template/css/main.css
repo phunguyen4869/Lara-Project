@@ -987,7 +987,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   width: 60px;
   position: relative;
   margin-right: 20px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .header-cart-item-img img {
@@ -1019,9 +1019,9 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   opacity: 0;
 }
 
-.header-cart-item-img:hover:after {
+/* .header-cart-item-img:hover:after {
   opacity: 1;
-}
+} */
 
 /*---------------------------------------------*/
 .header-cart-item-txt {
@@ -1674,7 +1674,7 @@ button.mfp-close {
 }
 
 .swal-title {
-  font-family: Poppins-Bold;
+  font-family: FiraSansCondensed-Bold;
   color: #333333;
   font-size: 18px;
   line-height: 1.5;
@@ -1973,7 +1973,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart td {
-  font-family: Poppins-Regular;
+  font-family: FiraSansCondensed-Regular;
   color: #555;
   line-height: 1.6;
 }

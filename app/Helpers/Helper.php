@@ -100,4 +100,12 @@ class Helper
         }
         return $breadcrumb;
     }
+
+    public static function price($price, $price_sale){
+        if($price_sale > 0){
+            return $price_sale;
+        }else{
+            return $price;
+        }
+    }
 }
