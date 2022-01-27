@@ -25,6 +25,22 @@
             </div>
         </div>
 
+        <div class="input-group mb-3">
+            <input type="tel" name="phone" class="form-control" placeholder="Tel" value="{{ $user->phone }}">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-phone"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <select name="payment_method" id="payment_method" class="form-control">
+                <option value="credit_card" @if ($user->payment_method == 'credit_card') selected @endif>Thẻ tín dụng</option>
+                <option value="atm_card" @if ($user->payment_method == 'atm_card') selected @endif>Thẻ ATM nội địa</option>
+                <option value="cod" @if ($user->payment_method == 'cod') selected @endif>Thanh toán khi nhận hàng</option>
+            </select>
+        </div>
 
         <div class="input-group mb-3">
             <select name="role" id="role" name="role" class="form-control">

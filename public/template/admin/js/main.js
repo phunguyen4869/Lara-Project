@@ -77,8 +77,8 @@ $('#upload').change(function () {
 $('#upload_multiple').change(function () {
     $('#image_show_multi').html('');
     const form = new FormData();
-    var filesCount = $(this)[0].files.length;
-    for (var i = 0; i < filesCount; i++) {
+    let filesCount = $(this)[0].files.length;
+    for (let i = 0; i < filesCount; i++) {
         form.append('files[]', $(this)[0].files[i]);
     }
     $.ajax({
@@ -131,3 +131,24 @@ function changeStatus(id, url, status) {
         });
     }
 }
+
+$('#payment_method').change(function () {
+    let value = $(this).find("option:selected").attr("value");
+
+    switch (value) {
+        case "credit_card":
+            $('#credit_card').removeClass('hidden');
+            $('#atm_card').addClass('hidden');
+            break;
+
+        case "atm_card":
+            $('#atm_card').removeClass('hidden');
+            $('#credit_card').addClass('hidden');
+            break;
+
+        case "cod":
+            $('#atm_card').addClass('hidden');
+            $('#credit_card').addClass('hidden');
+            break;
+    }
+});

@@ -159,6 +159,16 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ url('admin/user/payment/list') }}" class="nav-link">
+                                <i class="far fa-credit-card"></i>
+                                <p>
+                                    Quản lí Payment Method
+                                    <i class="right fas fa-angle-right"></i>
+                                </p>
+                            </a>
+                        </li>
+
                         <li class="nav-item d-sm-inline-block">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>

@@ -220,6 +220,28 @@ Route::prefix('admin')->group(function () {
                     [UserController::class, 'destroy']
                 );
             });
+
+            Route::prefix('payment')->group(function () {
+                Route::get(
+                    'list',
+                    [UserController::class, 'paymentList']
+                );
+
+                Route::get(
+                    'edit/{user}',
+                    [UserController::class, 'paymentEdit']
+                );
+
+                Route::post(
+                    'edit/{user}',
+                    [UserController::class, 'paymentUpdate']
+                );
+
+                Route::delete(
+                    'destroy',
+                    [UserController::class, 'paymentDestroy']
+                );
+            });
         });
 
         //category routes
@@ -395,28 +417,33 @@ Route::prefix('admin')->group(function () {
 Route::get('/', [MainController::class, 'index']);
 
 //show product modal
-Route::get('/productModal', [MainController::class, 'showProductModal']);
+Route::get('productModal', [MainController::class, 'showProductModal']);
 
 //load more products
-Route::get('/loadmore', [MainController::class, 'loadMore']);
+Route::get('loadmore', [MainController::class, 'loadMore']);
 
 //category page
-Route::get('/category/{id}-{slug}', [MainCategoryController::class, 'index']);
+Route::get('category/{id}-{slug}', [MainCategoryController::class, 'index']);
 
 //product detail page
-Route::get('/product/{id}-{slug}', [MainController::class, 'showProductDetail']);
+Route::get('product/{id}-{slug}', [MainController::class, 'showProductDetail']);
 
 //add product to cart
-Route::post('/addToCart', [CartController::class, 'addToCart']);
+Route::post('addToCart', [CartController::class, 'addToCart']);
 
 //change product quantity
-Route::get('/updateCart', [CartController::class, 'updateCart']);
+Route::get('updateCart', [CartController::class, 'updateCart']);
 
 //remove product from cart
-Route::get('/removeProduct', [CartController::class, 'removeProduct']);
+Route::get('removeProduct', [CartController::class, 'removeProduct']);
 
 //show cart
-Route::get('/cart', [CartController::class, 'showCart']);
+Route::get('cart', [CartController::class, 'showCart']);
+
+//check out
+Route::get('checkout', [CartController::class, 'checkOut']);
+
+Route::post('checkout', [CartController::class, 'sendOrder']);
 
 //logout route
 Route::get(

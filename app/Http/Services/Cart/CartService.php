@@ -2,6 +2,8 @@
 
 namespace App\Http\Services\Cart;
 
+use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
@@ -56,7 +58,7 @@ class CartService
 
         $carts = Session::get('carts');
 
-        if (is_null($carts['products'])) {
+        if (is_null($carts)) {
             Session::put('carts', [
                 'products' => [
                     $product_id => $product_quantity
@@ -142,6 +144,11 @@ class CartService
         } else {
             return false;
         }
+    }
+
+    public function sendOrder($request)
+    {
+
     }
 
     public function destroy()

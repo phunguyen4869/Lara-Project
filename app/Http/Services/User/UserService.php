@@ -23,12 +23,25 @@ class UserService
         return User::where('email', $email)->first();
     }
 
+    public function getPaymentMethod()
+    {
+        return User::select('id', 'name', 'payment_method', 'credit_card_number', 'expiration_date', 'ccv_code', 'credit_card_name', 'atm_card_number', 'bank_name', 'atm_card_name')->get();
+    }
+
+    public function getPaymentMethodById($id)
+    {
+        return User::select('credit_card_number', 'expiration_date', 'ccv_code', 'credit_card_name', 'atm_card_number', 'bank_name', 'atm_card_name')->where('id', $id)->get();
+    }
+
     public function insert($request)
     {
+        //dd($request->input());
         try {
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'phone' => $request->phone,
+                'payment_method' => $request->payment_method,
                 'password' => bcrypt($request->password),
             ]);
 
@@ -48,6 +61,8 @@ class UserService
             $user = User::find($userID);
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->payment_method = $request->payment_method;
             $user->password = bcrypt($request->password);
             $user->save();
 
@@ -75,5 +90,40 @@ class UserService
         }
 
         return  true;
+    }
+
+    public function updatePaymentMethod($request, $user)
+    {
+        try {
+            $user->fill($request->input())->save();
+
+            Session::flash('success', 'Sửa payment method thành công');
+        } catch (\Exception $error) {
+            Session::flash('error', 'Sửa payment method không thành công');
+            Log::error($error->getMessage());
+            return  false;
+        }
+        return true;
+    }
+
+    public function destroyPaymentMethod($id)
+    {
+        $user = User::find($id);
+        try {
+            $user->fill([
+                'payment_method' => 'cod',
+                'credit_card_number' => null,
+                'expiration_date' => null,
+                'ccv_code' => null,
+                'credit_card_name' => null,
+                'atm_card_number' => null,
+                'bank_name' => null,
+                'atm_card_name' => null
+            ])->save();
+        } catch (\Exception $error) {
+            Log::error($error->getMessage());
+            return  false;
+        }
+        return true;
     }
 }

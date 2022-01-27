@@ -155,7 +155,9 @@ class UserController extends Controller
         $result = $this->user->update($request, $user->id);
 
         if ($result) {
-            $user->syncRoles($request->role);
+            if ($user->id != 1) {
+                $user->syncRoles($request->role);
+            }
 
             return redirect('admin/user/list');
         } else {
@@ -171,6 +173,66 @@ class UserController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Xóa user thành công'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+            ]);
+        }
+    }
+
+    public function paymentList()
+    {
+        $users = $this->user->getPaymentMethod();
+
+        return view('admin.users.payment.list', [
+            'title' => 'Payment list',
+            'users' => $users,
+        ]);
+    }
+
+    public function paymentEdit(User $user)
+    {
+        return view('admin.users.payment.edit', [
+            'title' => 'Edit payment',
+            'user' => $user,
+        ]);
+    }
+
+    public function paymentUpdate(Request $request, User $user)
+    {
+        if ($request->payment_method == 'credit_card') {
+            $this->validate($request, [
+                'credit_card_number' => 'required',
+                'expiration_date' => 'required',
+                'ccv_code' => 'required|integer',
+                'credit_card_name' => 'required',
+            ]);
+        } elseif ($request->payment_method == 'atm_card') {
+            $this->validate($request, [
+                'atm_card_number' => 'required',
+                'bank_name' => 'required',
+                'atm_card_name' => 'required',
+            ]);
+        }
+
+        $result = $this->user->updatePaymentMethod($request, $user);
+
+        if ($result) {
+            return redirect('admin/user/payment/list');
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function paymentDestroy(Request $request)
+    {
+        $result = $this->user->destroyPaymentMethod($request->id);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa payment method thành công. User sẽ thanh toán qua phương thức COD'
             ]);
         } else {
             return response()->json([

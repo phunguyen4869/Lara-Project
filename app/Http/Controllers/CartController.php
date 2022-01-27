@@ -98,4 +98,23 @@ class CartController extends Controller
             ]);
         }
     }
+
+    public function checkOut()
+    {
+        $products = $this->cart->getProducts();
+        $quantity = $this->cart->getQuantity();
+        $total = $this->cart->total();
+
+        return view('checkout', [
+            'title' => 'Checkout',
+            'products' => $products,
+            'quantity' => $quantity,
+            'total' => $total
+        ]);
+    }
+
+    public function sendOrder(Request $request)
+    {
+        dd($request->all());
+    }
 }

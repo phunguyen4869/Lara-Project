@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-    <form class="bg0 p-t-75 p-b-85">
+    <form action="#" class="bg0 p-t-75 p-b-85" method="POST">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -37,32 +37,12 @@
                                             <td class="column-3">₫{{ number_format($price_final) }}</td>
                                             <input type="hidden" id="product_price" value="{{ $price_final }}">
 
-                                            <td class="column-4">
-                                                <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-                                                        onclick="changeQuantity({{ $product->id }}, {{ $price_final }}, 'down')">
-                                                        <i class="fs-16 zmdi zmdi-minus"></i>
-                                                    </div>
-
-                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                        id="quantity_product_{{ $product->id }}"
-                                                        onchange="changeQuantity({{ $product->id }}, {{ $price_final }})"
-                                                        name="num-product" value="{{ $quantity[$product->id] }}">
-
-                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
-                                                        onclick="changeQuantity({{ $product->id }}, {{ $price_final }}, 'up')">
-                                                        <i class="fs-16 zmdi zmdi-plus"></i>
-                                                    </div>
-                                                </div>
+                                            <td class="column-5">
+                                                {{ $quantity[$product->id] }}
                                             </td>
 
                                             <td class="column-5 totalPrice" id="total_product_price_{{ $product->id }}">
                                                 ₫{{ number_format($price_final * $quantity[$product->id]) }}
-                                            </td>
-                                            <td>
-                                                <a onclick="removeProduct({{ $product->id }})" style="cursor: pointer">
-                                                    <span class="lnr lnr-trash" style="font-size:20px"></span>
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -183,12 +163,81 @@
                             </div>
                         </div>
 
-                        <a href="/checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                            Proceed to Checkout
-                        </a>
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
+                                    placeholder="Name" required>
+                            </div>
+
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="email" name="email"
+                                    placeholder="Email" required>
+                            </div>
+
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="tel" name="phone"
+                                    placeholder="Phone" required>
+                            </div>
+
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address"
+                                    placeholder="Address" required>
+                            </div>
+
+                            <div class="bor8 bg0 m-b-12">
+                                <select name="payment_method" id="payment_method" class="form-control">
+                                    <option value="credit_card">Thẻ tín dụng</option>
+                                    <option value="atm_card">Thẻ ATM nội địa</option>
+                                    <option value="cod" selected="selected">Thanh toán khi nhận hàng</option>
+                                </select>
+                            </div>
+                            <div class="flex-w flex-t bor12 p-t-15 p-b-30 hidden" id="credit_card">
+                                <div class="bor8 bg0 m-b-12">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="credit_card_number"
+                                        placeholder="Card number">
+                                </div>
+
+                                <div class="bor8 bg0 m-b-12" style="width: 70%;">
+                                    <input type="text" name="expiration_date"
+                                        placeholder="Expiration date" class="stext-111 cl8 plh3 size-111 p-lr-15"
+                                     />
+                                </div>
+
+                                <div class="bor8 bg0 m-b-12" style="width: 30%;">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="ccv_code"
+                                        placeholder="CVV">
+                                </div>
+
+                                <div class="bor8 bg0 m-b-12">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="credit_card_name"
+                                        placeholder="Name">
+                                </div>
+                            </div>
+
+                            <div class="flex-w flex-t bor12 p-t-15 p-b-30 hidden" id="atm_card">
+                                <div class="bor8 bg0 m-b-12">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="atm_card_number"
+                                        placeholder="Card number">
+                                </div>
+
+                                <div class="bor8 bg0 m-b-12">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="bank_name"
+                                        placeholder="Bank name">
+                                </div>
+
+                                <div class="bor8 bg0 m-b-12">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="atm_card_name"
+                                        placeholder="Name">
+                                </div>
+                            </div>
+                            <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                                Checkout
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        @csrf
     </form>
 @endsection

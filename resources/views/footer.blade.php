@@ -228,6 +228,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
  <!--===============================================================================================-->
  <script src="/template/vendor/daterangepicker/moment.min.js"></script>
  <script src="/template/vendor/daterangepicker/daterangepicker.js"></script>
+ <script>
+     $(function() {
+         $('input[name="expiration_date"]').daterangepicker({
+             singleDatePicker: true,
+             showDropdowns: true,
+             minYear: 1990,
+             maxYear: 2021,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                }
+         });
+     });
+ </script>
  <!--===============================================================================================-->
  <script src="/template/vendor/slick/slick.min.js"></script>
  <script src="/template/js/slick-custom.js"></script>

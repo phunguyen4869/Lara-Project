@@ -22,6 +22,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'payment_method',
+        'credit_card_number',
+        'expiration_date',
+        'ccv_code',
+        'credit_card_name',
+        'atm_card_number',
+        'bank_name',
+        'atm_card_name',
     ];
 
     /**
