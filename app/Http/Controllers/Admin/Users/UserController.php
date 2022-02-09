@@ -116,6 +116,8 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email:filter|unique:users,email',
+            'phone' => 'required',
+            'address' => 'required',
             'password' => 'required',
             're_password' => 'required|same:password',
         ]);
@@ -205,7 +207,7 @@ class UserController extends Controller
             $this->validate($request, [
                 'credit_card_number' => 'required',
                 'expiration_date' => 'required',
-                'ccv_code' => 'required|integer',
+                'cvv_code' => 'required|integer',
                 'credit_card_name' => 'required',
             ]);
         } elseif ($request->payment_method == 'atm_card') {
@@ -232,7 +234,7 @@ class UserController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa payment method thành công. User sẽ thanh toán qua phương thức COD'
+                'message' => 'Xóa payment method thành công. User sẽ thanh toán mặc định qua phương thức COD'
             ]);
         } else {
             return response()->json([

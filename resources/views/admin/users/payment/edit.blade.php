@@ -27,8 +27,8 @@
             </div>
 
             <div class="input-group mb-3">
-                <input type="number" name="ccv_code" class="form-control" placeholder="CCV code"
-                    value="{{ $user->ccv_code }}">
+                <input type="number" name="cvv_code" class="form-control" placeholder="CvV code"
+                    value="{{ $user->cvv_code }}">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>

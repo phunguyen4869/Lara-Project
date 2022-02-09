@@ -99,8 +99,13 @@ class CartController extends Controller
         }
     }
 
-    public function checkOut()
+    public function checkOut(Request $request)
     {
+        if ($request->user() != null) {
+            $user = $request->user();
+        } else {
+            $user = null;
+        }
         $products = $this->cart->getProducts();
         $quantity = $this->cart->getQuantity();
         $total = $this->cart->total();
@@ -109,12 +114,25 @@ class CartController extends Controller
             'title' => 'Checkout',
             'products' => $products,
             'quantity' => $quantity,
-            'total' => $total
+            'total' => $total,
+            'user' => $user
         ]);
     }
 
     public function sendOrder(Request $request)
     {
-        dd($request->all());
+        if ($request->user() != null) {
+            $user = $request->user();
+        } else {
+            $user = null;
+        }
+
+        $result = $this->cart->sendOrder($request, $user);  
+
+        if ($result) {
+            return redirect()->back()->with('success', 'Đã đặt hàng thành công');
+        } else {
+            return redirect()->back()->with('error', 'Đặt hàng thất bại');
+        }
     }
 }

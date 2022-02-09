@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'payment_method',
         'credit_card_number',
         'expiration_date',
-        'ccv_code',
+        'cvv_code',
         'credit_card_name',
         'atm_card_number',
         'bank_name',

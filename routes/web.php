@@ -222,25 +222,28 @@ Route::prefix('admin')->group(function () {
             });
 
             Route::prefix('payment')->group(function () {
-                Route::get(
-                    'list',
-                    [UserController::class, 'paymentList']
-                );
+                Route::middleware('permission:edit payment')->group(function () {
+                    Route::get(
+                        'list',
+                        [UserController::class, 'paymentList']
+                    );
+                    Route::get(
+                        'edit/{user}',
+                        [UserController::class, 'paymentEdit']
+                    );
 
-                Route::get(
-                    'edit/{user}',
-                    [UserController::class, 'paymentEdit']
-                );
+                    Route::post(
+                        'edit/{user}',
+                        [UserController::class, 'paymentUpdate']
+                    );
+                });
 
-                Route::post(
-                    'edit/{user}',
-                    [UserController::class, 'paymentUpdate']
-                );
-
-                Route::delete(
-                    'destroy',
-                    [UserController::class, 'paymentDestroy']
-                );
+                Route::middleware('permission:delete payment')->group(function () {
+                    Route::delete(
+                        'destroy',
+                        [UserController::class, 'paymentDestroy']
+                    );
+                });
             });
         });
 

@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('content')
+@include('alert')
     <form action="#" class="bg0 p-t-75 p-b-85" method="POST">
         <div class="container">
             <div class="row">
@@ -166,68 +167,84 @@
                         <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                             <div class="bor8 bg0 m-b-12">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
-                                    placeholder="Name" required>
+                                    value="{{ $user != null ? $user->name : '' }}" placeholder="Name" required>
                             </div>
 
                             <div class="bor8 bg0 m-b-12">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="email" name="email"
-                                    placeholder="Email" required>
+                                    value="{{ $user != null ? $user->email : '' }}" placeholder="Email" required>
                             </div>
 
                             <div class="bor8 bg0 m-b-12">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="tel" name="phone"
-                                    placeholder="Phone" required>
+                                    value="{{ $user != null ? $user->phone : '' }}" placeholder="Phone" required>
                             </div>
 
                             <div class="bor8 bg0 m-b-12">
                                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address"
-                                    placeholder="Address" required>
+                                    value="{{ $user != null ? $user->address : '' }}" placeholder="Address" required>
                             </div>
 
                             <div class="bor8 bg0 m-b-12">
                                 <select name="payment_method" id="payment_method" class="form-control">
-                                    <option value="credit_card">Thẻ tín dụng</option>
-                                    <option value="atm_card">Thẻ ATM nội địa</option>
-                                    <option value="cod" selected="selected">Thanh toán khi nhận hàng</option>
+                                    <option value="credit_card" @if ($user != null && $user->payment_method == 'credit_card')
+                                        selected="selected"
+                                        @endif>Thẻ tín dụng</option>
+                                    <option value="atm_card" @if ($user != null && $user->payment_method == 'atm_card')
+                                        selected="selected"
+                                        @endif>Thẻ ATM nội địa</option>
+                                    <option value="cod" @if ($user == null || $user->payment_method == 'cod')
+                                        selected="selected"
+                                        @endif>Thanh toán khi nhận hàng</option>
                                 </select>
                             </div>
-                            <div class="flex-w flex-t bor12 p-t-15 p-b-30 hidden" id="credit_card">
+                            <div @if (($user != null && $user->payment_method != 'credit_card') || $user == null)
+                                class="flex-w flex-t bor12 p-t-15 p-b-30 hidden"
+                            @else
+                                class="flex-w flex-t bor12 p-t-15 p-b-30"
+                                @endif id="credit_card">
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="credit_card_number"
+                                        value="{{ $user != null ? $user->credit_card_number : '' }}"
                                         placeholder="Card number">
                                 </div>
 
                                 <div class="bor8 bg0 m-b-12" style="width: 70%;">
-                                    <input type="text" name="expiration_date"
-                                        placeholder="Expiration date" class="stext-111 cl8 plh3 size-111 p-lr-15"
-                                     />
+                                    <input type="text" name="expiration_date" placeholder="Expiration date"
+                                        value="{{ $user != null ? $user->expiration_date : '' }}"
+                                        class="stext-111 cl8 plh3 size-111 p-lr-15" />
                                 </div>
 
                                 <div class="bor8 bg0 m-b-12" style="width: 30%;">
-                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="ccv_code"
-                                        placeholder="CVV">
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="cvv_code"
+                                        value="{{ $user != null ? $user->cvv_code : '' }}" placeholder="CVV">
                                 </div>
 
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="credit_card_name"
-                                        placeholder="Name">
+                                        value="{{ $user != null ? $user->credit_card_name : '' }}" placeholder="Name">
                                 </div>
                             </div>
 
-                            <div class="flex-w flex-t bor12 p-t-15 p-b-30 hidden" id="atm_card">
+                            <div @if (($user != null && $user->payment_method != 'atm_card') || $user == null)
+                                class="flex-w flex-t bor12 p-t-15 p-b-30 hidden"
+                            @else
+                                class="flex-w flex-t bor12 p-t-15 p-b-30"
+                                @endif id="atm_card">
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="atm_card_number"
+                                        value="{{ $user != null ? $user->atm_card_number : '' }}"
                                         placeholder="Card number">
                                 </div>
 
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="bank_name"
-                                        placeholder="Bank name">
+                                        value="{{ $user != null ? $user->bank_name : '' }}" placeholder="Bank name">
                                 </div>
 
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="atm_card_name"
-                                        placeholder="Name">
+                                        value="{{ $user != null ? $user->atm_card_name : '' }}" placeholder="Name">
                                 </div>
                             </div>
                             <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">

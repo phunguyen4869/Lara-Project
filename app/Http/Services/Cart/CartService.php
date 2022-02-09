@@ -2,9 +2,11 @@
 
 namespace App\Http\Services\Cart;
 
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class CartService
@@ -36,6 +38,17 @@ class CartService
     }
 
     public function getQuantity()
+    {
+        $carts = Session::get('carts');
+
+        if ($carts) {
+            return $carts['products'];
+        } else {
+            return null;
+        }
+    }
+
+    public function getCart()
     {
         $carts = Session::get('carts');
 
@@ -146,9 +159,87 @@ class CartService
         }
     }
 
-    public function sendOrder($request)
+    public function sendOrder($request, $user)
     {
+        try {
+            DB::beginTransaction();
 
+            if (!empty($user)) {
+                $userPayment = $user->payment_method;
+                $requestPayment = $request->payment_method;
+                $customer_id = $user->id;
+
+                if ($userPayment == $requestPayment) {
+                    $paymentMethod = $userPayment;
+                } else {
+                    $paymentMethod = $requestPayment;
+                }
+
+                $customer = Customer::find($customer_id);
+
+                if (empty($customer)) {
+                    $customer = Customer::create([
+                        'id' => $customer_id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'phone' => $user->phone,
+                        'address' => $user->address,
+                        'credit_card_number' => $user->credit_card_number,
+                        'expiration_date' => $user->expiration_date,
+                        'cvv_code' => $user->cvv_code,
+                        'credit_card_name' => $user->credit_card_name,
+                        'atm_card_number' => $user->atm_card_number,
+                        'bank_name' => $user->bank_name,
+                        'atm_card_name' => $user->atm_card_name,
+                    ]);
+                }
+            } else {
+                $customer = Customer::create([
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'phone' => $request->input('phone'),
+                    'address' => $request->input('address'),
+                    'credit_card_number' => $request->input('credit_card_number'),
+                    'expiration_date' => $request->input('expiration_date'),
+                    'cvv_code' => $request->input('cvv_code'),
+                    'credit_card_name' => $request->input('credit_card_name'),
+                    'atm_card_number' => $request->input('atm_card_number'),
+                    'bank_name' => $request->input('bank_name'),
+                    'atm_card_name' => $request->input('atm_card_name'),
+                ]);
+
+                $paymentMethod = $request->payment_method;
+
+                $customer_id = $customer->id;
+            }
+
+            $cart = $this->getCart();
+
+            foreach ($cart as $key => $value) {
+                $product_id[] = $key;
+                $product_quantity[] = $value;
+            }
+
+            $product_id = implode('&', $product_id);
+            $product_quantity = implode('&', $product_quantity);
+
+            Order::create([
+                'product_id' => $product_id,
+                'quantity' => $product_quantity,
+                'total' => $this->total(),
+                'payment_method' => $paymentMethod,
+                'status' => 0,
+                'customer_id' => $customer_id,
+            ]);
+
+            DB::commit();
+            Session::forget('carts');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollBack();
+            return false;
+        }
+        return true;
     }
 
     public function destroy()

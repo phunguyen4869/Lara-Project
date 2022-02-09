@@ -25,10 +25,19 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="tel" name="phone" class="form-control" placeholder="Tel">
+            <input type="phone" name="phone" class="form-control" placeholder="Tel">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-phone"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="address" name="address" class="form-control" placeholder="Address">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-location-arrow"></span>
                 </div>
             </div>
         </div>
